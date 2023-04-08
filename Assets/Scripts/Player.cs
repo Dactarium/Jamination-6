@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
+    private int selectedApple;
     private Tree tree;
     [SerializeField]
     private Rigidbody rb;
@@ -37,11 +38,11 @@ public class Player : MonoBehaviour
         if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
         {
             if (moveZ > 0) direction = Direction.Up;
-            else direction = Direction.Down;
+            else if(moveZ < 0) direction = Direction.Down;
         } else
         {
             if (moveX > 0) direction = Direction.Right;
-            else direction = Direction.Left;
+            else if(moveX < 0) direction = Direction.Left;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
@@ -63,7 +64,6 @@ public class Player : MonoBehaviour
                     RedApple++;
                     tree.Apple--;
                     RedAppleCounter.text = RedApple.ToString();
-                    Debug.Log("Red Apple : " + RedApple);
                 }
             }
             if (tree.Dimension == Dimension.Blue && Input.GetKeyDown(KeyCode.E)) {
@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
                     BlueApple++;
                     tree.Apple--;
                     BlueAppleCounter.text = BlueApple.ToString();
-                    Debug.Log("Blue Apple : " + BlueApple);
                 }
             }
             if (tree.Dimension == Dimension.Green && Input.GetKeyDown(KeyCode.E)) {
@@ -81,7 +80,6 @@ public class Player : MonoBehaviour
                     GreenApple++;
                     tree.Apple--;
                     GreenAppleCounter.text = GreenApple.ToString();
-                    Debug.Log("Green Apple : " + GreenApple);
                 }
             } 
         }
@@ -91,9 +89,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Red Apple : " + RedApple);
-        Debug.Log("Blue Apple : " + BlueApple);
-        Debug.Log("Green Apple : " + GreenApple);
         if (other.tag.Equals("Tree")) 
         {
             tree = other.GetComponent<Tree>();

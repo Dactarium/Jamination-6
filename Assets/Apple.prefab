@@ -49,8 +49,7 @@ MonoBehaviour:
   red: {fileID: 21300000, guid: ff7129d08420d504ebb0f748957f0547, type: 3}
   blue: {fileID: 21300000, guid: 7ab4e25276b098944819d4f4d828cd3d, type: 3}
   green: {fileID: 21300000, guid: 1c199b6f5e73d6a488c7818feee289a1, type: 3}
-  ThrowDirection: 0
-  dimension: 0
+  Sprite: {fileID: 5472697888099990205}
   AppleBody: {fileID: 6621084646878421822}
 --- !u!135 &6621084646878421823
 SphereCollider:
