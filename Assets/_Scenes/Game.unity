@@ -596,17 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 2131439301}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
-      propertyPath: runSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
-        type: 3}
       propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
-        type: 3}
-      propertyPath: walkSpeed
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,

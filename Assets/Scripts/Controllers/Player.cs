@@ -70,11 +70,11 @@ namespace Controllers
 		private void Start()
 		{
 			moveSpeed = walkSpeed;
+			stamina = maxStamina;
 		}
 
 		private void Update()
 		{
-			print(stamina);
 			if (!isRunning && stamina < maxStamina)
 			{
 				stamina += staminaRegen * Time.deltaTime;
@@ -142,7 +142,7 @@ namespace Controllers
 			}
 			if (isRunning)
 			{
-				stamina -= staminaCost;
+				stamina -= staminaCost * Time.deltaTime;
 				moveSpeed = runSpeed;
 				if (stamina < 0)
 				{
@@ -153,6 +153,7 @@ namespace Controllers
 			if (Input.GetKeyUp(KeyCode.LeftShift))
 			{
 				isRunning = false;
+				moveSpeed = walkSpeed;
 			}
 
 			#region Changing Dimension

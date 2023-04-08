@@ -86,12 +86,12 @@ MonoBehaviour:
   GreenAppleCounter: {fileID: 0}
   BlueAppleCounter: {fileID: 0}
   BagCounter: {fileID: 0}
-  runSpeed: 7.5
-  walkSpeed: 5
-  staminaCost: 0.5
-  staminaRegen: 3
-  maxStamina: 40
-  runStartStamina: 7.5
+  runSpeed: 5
+  walkSpeed: 2
+  staminaCost: 10
+  staminaRegen: 15
+  maxStamina: 15
+  runStartStamina: 5
   carrotSlots: {fileID: 0}
   carrotImage: {fileID: 8329359989547684001, guid: 92d6a7b0202fa454dbcd2251247f85ee,
     type: 3}
