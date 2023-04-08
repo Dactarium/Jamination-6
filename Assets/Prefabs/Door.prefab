@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8474905264533712807}
   - component: {fileID: 8474905264533712804}
+  - component: {fileID: 6011055578249077599}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7857ceb78ba14d73b10aaf05a3cf00f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredKey: 3
+--- !u!135 &6011055578249077599
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474905264533712806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &8474905265960619556
 GameObject:
   m_ObjectHideFlags: 0
