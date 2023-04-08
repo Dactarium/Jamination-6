@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
+
     private Tree tree;
     [SerializeField]
     private Rigidbody rb;
@@ -37,11 +38,11 @@ public class Player : MonoBehaviour
         if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
         {
             if (moveZ > 0) direction = Direction.Up;
-            else direction = Direction.Down;
+            else if(moveZ < 0) direction = Direction.Down;
         } else
         {
             if (moveX > 0) direction = Direction.Right;
-            else direction = Direction.Left;
+            else if(moveX < 0) direction = Direction.Left;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
@@ -49,7 +50,33 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
 
         if (Input.GetButtonDown("Fire1")) {
-            Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
+            if(appleDimension == Dimension.Red)
+            {
+                if(RedApple > 0)
+                {
+                    RedApple--;
+                    shootApple();
+                    RedAppleCounter.text = RedApple.ToString();
+                }
+            }
+            if (appleDimension == Dimension.Green)
+            {
+                if (GreenApple > 0)
+                {
+                    GreenApple--;
+                    shootApple();
+                    GreenAppleCounter.text = GreenApple.ToString();
+                }
+            }
+            if (appleDimension == Dimension.Blue)
+            {
+                if (BlueApple > 0)
+                {
+                    BlueApple--;
+                    shootApple();
+                    BlueAppleCounter.text = BlueApple.ToString();
+                }
+            }
         }
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
         float moveSpeed = 10f;
@@ -58,37 +85,33 @@ public class Player : MonoBehaviour
         if (tree)
         {
             if (tree.Dimension == Dimension.Red && Input.GetKeyDown(KeyCode.E)) {
-                if(tree.Apple > 0)
+                if(RedApple < 3)
                 {
                     RedApple++;
-                    tree.Apple--;
                     RedAppleCounter.text = RedApple.ToString();
-                    Debug.Log("Red Apple : " + RedApple);
                 }
             }
             if (tree.Dimension == Dimension.Blue && Input.GetKeyDown(KeyCode.E)) {
-                if (tree.Apple > 0)
+                if (BlueApple < 3)
                 {
                     BlueApple++;
-                    tree.Apple--;
                     BlueAppleCounter.text = BlueApple.ToString();
-                    Debug.Log("Blue Apple : " + BlueApple);
                 }
             }
             if (tree.Dimension == Dimension.Green && Input.GetKeyDown(KeyCode.E)) {
-                if (tree.Apple > 0)
+                if (GreenApple < 3)
                 {
                     GreenApple++;
-                    tree.Apple--;
                     GreenAppleCounter.text = GreenApple.ToString();
-                    Debug.Log("Green Apple : " + GreenApple);
                 }
             } 
         }
 
     }
-
-
+    private void shootApple()
+    {
+        Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Tree")) 

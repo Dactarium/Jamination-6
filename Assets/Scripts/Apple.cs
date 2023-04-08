@@ -12,6 +12,7 @@ public class Apple : MonoBehaviour
     private Sprite blue;
     [SerializeField]
     private Sprite green;
+    [SerializeField]
     private SpriteRenderer Sprite;
     public GameObject AppleBody;
     // Start is called before the first frame update
