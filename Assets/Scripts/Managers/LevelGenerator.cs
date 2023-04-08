@@ -38,13 +38,7 @@ public class LevelGenerator : Helpers.Singleton<LevelGenerator>
 	private GameObject[] blocks;
 
 	[SerializeField]
-	private Key redKey;
-	
-	[SerializeField]
-	private Key greenKey;
-	
-	[SerializeField]
-	private Key blueKey;
+	private Key key;
 
 	[SerializeField]
 	private Door door;
@@ -156,16 +150,7 @@ public class LevelGenerator : Helpers.Singleton<LevelGenerator>
 						blueTree.transform.position = position; 
 						break;
 					case EntityType.Key:
-						Key key = Instantiate(
-							dimension switch
-							{
-								Dimension.Red => redKey,
-								Dimension.Blue => blueKey,
-								Dimension.Green => greenKey,
-								_ => redKey
-							},
-							parent
-						);
+						Key key = Instantiate(this.key, parent);
 						key.transform.position = position;
 						key.Model.eulerAngles = angle;
 						break;

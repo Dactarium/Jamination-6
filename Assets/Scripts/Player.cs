@@ -45,8 +45,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
+    [SerializeField]
+    private Animator animator;
+
     private bool isRotating = false;
-    
+
+    public Action<Vector3> OnRotate;
+
     private void Update()
     {
 	    HandleMovement();
@@ -171,13 +176,34 @@ public class Player : MonoBehaviour
 	    
 	    if(Mathf.Abs(move.y) > Mathf.Abs(move.x))
 	    {
-		    if (move.y > 0) direction = Direction.Up;
-		    else if(move.y < 0) direction = Direction.Down;
+		    if(move.y > 0 && direction is not Direction.Up)
+		    {
+			    direction = Direction.Up;
+				animator.SetTrigger("Up");
+		    }
+		    else if(move.y < 0 && direction is not Direction.Down)
+		    {
+			    direction = Direction.Down;
+			    animator.SetTrigger("Down");
+		    }
 	    } else
 	    {
-		    if (move.x > 0) direction = Direction.Right;
-		    else if(move.x < 0) direction = Direction.Left;
+		    if(move.x > 0 && direction is not Direction.Right)
+		    {
+			    direction = Direction.Right;
+			    animator.SetTrigger("Right");
+		    }
+		    else if(move.x < 0 && direction is not Direction.Left)
+		    {
+			    direction = Direction.Left;
+			    animator.SetTrigger("Left");
+		    }
 	    }
+
+	    if(move.magnitude > 0)
+		    animator.SetBool("Walk", true);
+	    else
+			animator.SetBool("Walk", false);
 	    
 	    Vector3 moveDir = (move.y * transform.forward + move.x * transform.right).normalized;
 	    rb.position += moveDir * moveSpeed * Time.deltaTime;
@@ -198,6 +224,7 @@ public class Player : MonoBehaviour
 		    await Task.Yield();
 		    passedTime += Time.deltaTime;
 		    transform.eulerAngles = Vector3.up * Mathf.LerpAngle(angle, target, rotateCurve.Evaluate(passedTime / rotateDuration));
+		    OnRotate?.Invoke(transform.eulerAngles);
 	    }
 	    isRotating = false;
     }

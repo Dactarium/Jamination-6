@@ -7,9 +7,13 @@ namespace DefaultNamespace.Managers
 {
 	public class GameManager : Singleton<GameManager>
 	{
+		[field:SerializeField]
+		public Player Player { get; private set; }
+		
 		public Dimension CurrentDimension { get; private set; }
 
 		private DimensionController _dimensionController;
+		
 		private void Start()
 		{
 			_dimensionController = LevelGenerator.Instance.GenerateLevel(0);
