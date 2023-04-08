@@ -8,6 +8,14 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     public TextMeshProUGUI UIText;
+    public Apple Apple;
+    public GameObject AppleSpawn;
+    public TextMeshProUGUI RedAppleCounter;
+    public TextMeshProUGUI BlueAppleCounter;
+    public TextMeshProUGUI GreenAppleCounter;
+    private Direction direction = Direction.Up;
+    private Dimension appleDimension = Dimension.Red;
+    private Apple AppleBullet;
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
@@ -24,10 +32,25 @@ public class Player : MonoBehaviour
     {
         float moveX = 0f;
         float moveZ = 0f;
-        if (Input.GetKey(KeyCode.W)) moveZ = +1f;
-        if (Input.GetKey(KeyCode.S)) moveZ = -1f;
-        if (Input.GetKey(KeyCode.A)) moveX = -1f;
-        if (Input.GetKey(KeyCode.D)) moveX = +1f;
+        moveZ = Mathf.RoundToInt(Input.GetAxis("Vertical"));
+        moveX = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
+        if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
+        {
+            if (moveZ > 0) direction = Direction.Up;
+            else direction = Direction.Down;
+        } else
+        {
+            if (moveX > 0) direction = Direction.Right;
+            else direction = Direction.Left;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
+
+        if (Input.GetButtonDown("Fire1")) {
+            Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
+        }
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
         float moveSpeed = 10f;
         rb.position += moveDir * moveSpeed * Time.deltaTime;
@@ -39,6 +62,7 @@ public class Player : MonoBehaviour
                 {
                     RedApple++;
                     tree.Apple--;
+                    RedAppleCounter.text = RedApple.ToString();
                     Debug.Log("Red Apple : " + RedApple);
                 }
             }
@@ -47,6 +71,7 @@ public class Player : MonoBehaviour
                 {
                     BlueApple++;
                     tree.Apple--;
+                    BlueAppleCounter.text = BlueApple.ToString();
                     Debug.Log("Blue Apple : " + BlueApple);
                 }
             }
@@ -55,6 +80,7 @@ public class Player : MonoBehaviour
                 {
                     GreenApple++;
                     tree.Apple--;
+                    GreenAppleCounter.text = GreenApple.ToString();
                     Debug.Log("Green Apple : " + GreenApple);
                 }
             } 
