@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb77569614e4c8eab784478ebadee84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Model>k__BackingField: {fileID: 7199859164274700555}
   <Dimension>k__BackingField: 0
+  rotateSpeed: 40
 --- !u!135 &7199859163248334744
 SphereCollider:
   m_ObjectHideFlags: 0

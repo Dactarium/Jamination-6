@@ -25,7 +25,7 @@ public class PatternEditor : EditorWindow
     static int[,] intPattern;
     static float[,] floatPattern;
     static string[,] stringPattern;
-	static Entity[,] entityPattern;
+	static EntityType[,] entityPattern;
     
     static bool[] boolPatternVertical;
     static bool[] boolPatternHorizontal;
@@ -35,14 +35,14 @@ public class PatternEditor : EditorWindow
     static float[] floatPatternHorizontal;
     static string[] stringPatternVertical;
     static string[] stringPatternHorizontal;
-    static Entity[] entityPatternVertical;
-    static Entity[] entityPatternHorizontal;
+    static EntityType[] entityPatternVertical;
+    static EntityType[] entityPatternHorizontal;
 
     static bool boolPatternAll;
     static int intPatternAll;
     static float floatPatternAll;
     static string stringPatternAll;
-    static Entity entityPatternAll;
+    static EntityType entityTypePatternAll;
 
 
     static TextAsset json;
@@ -248,7 +248,7 @@ public class PatternEditor : EditorWindow
                 patternType = PatternType.Float;
             }else if(jsonType == typeof(string)){
                 patternType = PatternType.String;
-            }else if(jsonType == typeof(Entity)){
+            }else if(jsonType == typeof(EntityType)){
 	            patternType = PatternType.Entity;
             }else{
                 Debug.LogWarning("Unsupported Pattern Type");
@@ -292,7 +292,7 @@ public class PatternEditor : EditorWindow
                     stringPatternHorizontal = setPatternSideArray(stringPatternHorizontal, false);
                     break;
                 case PatternType.Entity:
-	                Entity[,] _entityPattern = dataToPattern<Entity>(json.text);
+	                EntityType[,] _entityPattern = dataToPattern<EntityType>(json.text);
 	                lenX = _entityPattern.GetLength(0);
 	                lenY = _entityPattern.GetLength(1);
 	                entityPattern = _entityPattern;
@@ -338,7 +338,7 @@ public class PatternEditor : EditorWindow
                         stringPattern[x,y] = EditorGUILayout.TextField(stringPattern[x,y], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
                         break;
                     case PatternType.Entity:
-	                    entityPattern[x, y] = (Entity)EditorGUILayout.EnumPopup(entityPattern[x, y], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
+	                    entityPattern[x, y] = (EntityType)EditorGUILayout.EnumPopup(entityPattern[x, y], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
 	                    break;
                 }
                 
@@ -481,19 +481,19 @@ public class PatternEditor : EditorWindow
                 }
                 break;
             case PatternType.Entity:
-	            Entity newEntityValue = (Entity)EditorGUILayout.EnumPopup(entityPatternAll, GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
-	            if(newEntityValue != entityPatternAll){
-		            entityPatternAll = newEntityValue;
+	            EntityType newEntityTypeValue = (EntityType)EditorGUILayout.EnumPopup(entityTypePatternAll, GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
+	            if(newEntityTypeValue != entityTypePatternAll){
+		            entityTypePatternAll = newEntityTypeValue;
 
 		            for(int y = 0; y < lenY; y++){
-			            entityPatternHorizontal[y] = newEntityValue;
+			            entityPatternHorizontal[y] = newEntityTypeValue;
 			            for(int x = 0; x < lenX; x++){
-				            entityPattern[x,y] = newEntityValue;
+				            entityPattern[x,y] = newEntityTypeValue;
 			            }
 		            }
 
 		            for(int x = 0; x < lenX; x++){
-			            entityPatternVertical[x] = newEntityValue;
+			            entityPatternVertical[x] = newEntityTypeValue;
 		            }
 	            }
 	            break;
@@ -546,12 +546,12 @@ public class PatternEditor : EditorWindow
                 }
                 break;
             case PatternType.Entity:
-	            Entity newEntityValue = (Entity)EditorGUILayout.EnumPopup(entityPatternVertical[x], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
-	            if(newEntityValue != entityPatternVertical[x]){
-		            entityPatternVertical[x] = newEntityValue;
+	            EntityType newEntityTypeValue = (EntityType)EditorGUILayout.EnumPopup(entityPatternVertical[x], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
+	            if(newEntityTypeValue != entityPatternVertical[x]){
+		            entityPatternVertical[x] = newEntityTypeValue;
 
 		            for(int y = 0; y < lenY; y++){
-			            entityPattern[x,y] = newEntityValue;
+			            entityPattern[x,y] = newEntityTypeValue;
 		            }
 	            }
 	            break;
@@ -608,12 +608,12 @@ public class PatternEditor : EditorWindow
                 GUILayout.Space(fieldWidth);
                 break;
             case PatternType.Entity:
-	            Entity newEntityValue = (Entity)EditorGUILayout.EnumPopup(entityPatternHorizontal[y], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
-	            if(newEntityValue != entityPatternHorizontal[y]){
-		            entityPatternHorizontal[y] = newEntityValue;
+	            EntityType newEntityTypeValue = (EntityType)EditorGUILayout.EnumPopup(entityPatternHorizontal[y], GUILayout.Width(fieldWidth), GUILayout.Height(fieldHeight));
+	            if(newEntityTypeValue != entityPatternHorizontal[y]){
+		            entityPatternHorizontal[y] = newEntityTypeValue;
 
 		            for(int x = 0; x < lenX; x++){
-			            entityPattern[x,y] = newEntityValue;
+			            entityPattern[x,y] = newEntityTypeValue;
 		            }
 	            }
 	            GUILayout.Space(fieldWidth);
@@ -654,7 +654,7 @@ public class PatternEditor : EditorWindow
             case PatternType.String:
                 return typeof(string);
 			case PatternType.Entity:
-				return typeof(Entity);
+				return typeof(EntityType);
             default:
                 return null;
         }

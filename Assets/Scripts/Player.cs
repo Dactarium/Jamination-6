@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using DefaultNamespace.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -30,105 +34,189 @@ public class Player : MonoBehaviour
     public GameObject carrotImage;
 
     private Tree tree;
+
+    [SerializeField]
+    private AnimationCurve rotateCurve;
+    
+    [SerializeField]
+    private float rotateDuration = 0.25f;
+    
     [SerializeField]
     private Rigidbody rb;
-    void Start()
+
+    private bool isRotating = false;
+    
+    private void Update()
     {
-        
+	    HandleMovement();
+	    HandleInputs();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandleInputs()
     {
-        float moveX = 0f;
-        float moveZ = 0f;
-        moveZ = Mathf.RoundToInt(Input.GetAxis("Vertical"));
-        moveX = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
-        if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
-        {
-            if (moveZ > 0) direction = Direction.Up;
-            else if(moveZ < 0) direction = Direction.Down;
-        } else
-        {
-            if (moveX > 0) direction = Direction.Right;
-            else if(moveX < 0) direction = Direction.Left;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
-        if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
-        if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            angle = (angle - 90) % 360;
-            transform.eulerAngles = new Vector3(0, angle, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            angle = (angle + 90) % 360;
-            transform.eulerAngles = new Vector3(0, angle, 0);
-        }
+	    #region Apple Selection
 
-        if (Input.GetButtonDown("Fire1")) {
-            if(appleDimension == Dimension.Red)
-            {
-                if(RedApple > 0)
-                {
-                    RedApple--;
-                    shootApple();
-                    RedAppleCounter.text = RedApple.ToString();
-                }
-            }
-            if (appleDimension == Dimension.Green)
-            {
-                if (GreenApple > 0)
-                {
-                    GreenApple--;
-                    shootApple();
-                    GreenAppleCounter.text = GreenApple.ToString();
-                }
-            }
-            if (appleDimension == Dimension.Blue)
-            {
-                if (BlueApple > 0)
-                {
-                    BlueApple--;
-                    shootApple();
-                    BlueAppleCounter.text = BlueApple.ToString();
-                }
-            }
-        }
-        Vector3 moveDir = transform.forward * moveZ + transform.right * moveX;
-        moveDir = moveDir.normalized;
-        rb.position += moveDir * moveSpeed * Time.deltaTime;
+	    if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
+	    else if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
+	    else if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
 
-        if (tree)
-        {
-            if (tree.Dimension == Dimension.Red && Input.GetKeyDown(KeyCode.F)) {
-                if(RedApple < 3)
-                {
-                    RedApple++;
-                    RedAppleCounter.text = RedApple.ToString();
-                }
-            }
-            if (tree.Dimension == Dimension.Blue && Input.GetKeyDown(KeyCode.F)) {
-                if (BlueApple < 3)
-                {
-                    BlueApple++;
-                    BlueAppleCounter.text = BlueApple.ToString();
-                }
-            }
-            if (tree.Dimension == Dimension.Green && Input.GetKeyDown(KeyCode.F)) {
-                if (GreenApple < 3)
-                {
-                    GreenApple++;
-                    GreenAppleCounter.text = GreenApple.ToString();
-                }
-            } 
-        }
+	    #endregion
 
+	    #region Rotate
+
+	    if(!isRotating)
+	    {
+		    if (Input.GetKeyDown(KeyCode.Q)) 
+		    {
+			    Rotate(angle = (angle - 90) % 360);
+		    }
+		    else if (Input.GetKeyDown(KeyCode.E))
+		    {
+			    Rotate(angle = (angle + 90) % 360);
+		    }
+	    }
+	    
+
+	    #endregion
+
+	    #region Shooting Apple
+
+	    if (Input.GetButtonDown("Fire1")) {
+		    if(appleDimension == Dimension.Red)
+		    {
+			    if(RedApple > 0)
+			    {
+				    RedApple--;
+				    ShootApple();
+				    RedAppleCounter.text = RedApple.ToString();
+			    }
+		    }
+		    if (appleDimension == Dimension.Green)
+		    {
+			    if (GreenApple > 0)
+			    {
+				    GreenApple--;
+				    ShootApple();
+				    GreenAppleCounter.text = GreenApple.ToString();
+			    }
+		    }
+		    if (appleDimension == Dimension.Blue)
+		    {
+			    if (BlueApple > 0)
+			    {
+				    BlueApple--;
+				    ShootApple();
+				    BlueAppleCounter.text = BlueApple.ToString();
+			    }
+		    }
+	    }
+
+	    #endregion
+
+	    #region Collecting Apple
+	    
+	    if (Input.GetKeyDown(KeyCode.F) && tree)
+	    {
+		    if (tree.Dimension == Dimension.Red) {
+			   CollectingApple(ref RedApple, ref RedAppleCounter);
+		    }else if (tree.Dimension == Dimension.Green) {
+			   CollectingApple(ref GreenApple, ref GreenAppleCounter);
+		    }else if (tree.Dimension == Dimension.Blue) {
+			    CollectingApple(ref BlueApple, ref BlueAppleCounter);
+		    }
+	    }
+
+	    #endregion
+
+	    #region Changing Dimension
+
+	    if(Input.GetButtonDown("Dimension") && CanSpendCurrentApple() && appleDimension != GameManager.Instance.CurrentDimension)
+	    {
+		    SpendCurrentApple();
+		    GameManager.Instance.ChangeDimension(appleDimension);
+		    UIText.gameObject.SetActive(false);
+	    }
+
+	    #endregion
     }
-    private void shootApple()
+
+    private void CollectingApple(ref int count, ref TextMeshProUGUI counter)
+    {
+	    if(count > 2)
+		    return;
+
+	    count++;
+	    counter.text = count.ToString();
+    }
+
+    private void SpendCurrentApple()
+    {
+	    switch(appleDimension)
+	    {
+		    case Dimension.Red:
+			    RedApple--;
+			    RedAppleCounter.text = RedApple.ToString();
+			    break;
+		    case Dimension.Blue:
+			    BlueApple--;
+			    BlueAppleCounter.text = BlueApple.ToString();
+			    break;
+		    case Dimension.Green:
+			    GreenApple--;
+			    GreenAppleCounter.text = GreenApple.ToString();
+			    break;
+		    default:
+			    throw new ArgumentOutOfRangeException();
+	    }
+    }
+    
+    private bool CanSpendCurrentApple()
+    {
+	    return appleDimension switch { 
+		    Dimension.Red => RedApple > 0,
+		    Dimension.Green => GreenApple > 0,
+		    Dimension.Blue => BlueApple > 0,
+		    _ => false};
+    }
+
+    private void HandleMovement()
+    {
+	    Vector2 move = Vector2.zero; 
+	    move.y = Mathf.RoundToInt(Input.GetAxis("Vertical"));
+	    move.x = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
+	    
+	    if(Mathf.Abs(move.y) > Mathf.Abs(move.x))
+	    {
+		    if (move.y > 0) direction = Direction.Up;
+		    else if(move.y < 0) direction = Direction.Down;
+	    } else
+	    {
+		    if (move.x > 0) direction = Direction.Right;
+		    else if(move.x < 0) direction = Direction.Left;
+	    }
+	    
+	    Vector3 moveDir = (move.y * transform.forward + move.x * transform.right).normalized;
+	    rb.position += moveDir * moveSpeed * Time.deltaTime;
+    }
+
+    private void ShootApple()
     {
         Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
+    }
+
+    private async void Rotate(float target)
+    {
+	    isRotating = true;
+	    float angle = transform.eulerAngles.y;
+	    float passedTime = 0f;
+	    while (passedTime <= rotateDuration)
+	    {
+		    await Task.Yield();
+		    passedTime += Time.deltaTime;
+		    transform.eulerAngles = Vector3.up * Mathf.LerpAngle(angle, target, rotateCurve.Evaluate(passedTime / rotateDuration));
+	    }
+	    isRotating = false;
     }
     private void OnTriggerEnter(Collider other)
     {

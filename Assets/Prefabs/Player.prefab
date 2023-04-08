@@ -86,8 +86,34 @@ MonoBehaviour:
   BlueAppleCounter: {fileID: 0}
   Camera: {fileID: 0}
   moveSpeed: 5
+  carrotSlots: {fileID: 0}
   carrotImage: {fileID: 8329359989547684001, guid: 92d6a7b0202fa454dbcd2251247f85ee,
     type: 3}
+  rotateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotateDuration: 0.6
   rb: {fileID: 5382336810237887331}
 --- !u!1 &5382336810302970148
 GameObject:
