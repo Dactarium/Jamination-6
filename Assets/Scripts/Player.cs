@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI RedAppleCounter;
     public TextMeshProUGUI GreenAppleCounter;
     public TextMeshProUGUI BlueAppleCounter;
-    public Camera Camera;
+	public TextMeshProUGUI BagCounter;
+	public Camera Camera;
     
     [SerializeField]
     private float moveSpeed = 5f;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
+	private int TotalApple;
     private float angle;
 
     [SerializeField]
@@ -145,27 +147,42 @@ public class Player : MonoBehaviour
     {
 	    if(count > 2)
 		    return;
-
+		if (TotalApple > 4)
+			return;
+		TotalApple++;
 	    count++;
+		BagCounter.text = TotalApple.ToString() + " / 5";
 	    counter.text = count.ToString();
     }
 
     private void SpendCurrentApple()
     {
-	    switch(appleDimension)
+		switch (appleDimension)
 	    {
 		    case Dimension.Red:
-			    RedApple--;
+				print(TotalApple);
+				TotalApple--;
+				print(TotalApple);
+				RedApple--;
 			    RedAppleCounter.text = RedApple.ToString();
-			    break;
+				BagCounter.text = TotalApple.ToString() + " / 5";
+				break;
 		    case Dimension.Blue:
-			    BlueApple--;
+				print(TotalApple);
+				TotalApple--;
+				print(TotalApple);
+				BlueApple--;
 			    BlueAppleCounter.text = BlueApple.ToString();
-			    break;
+				BagCounter.text = TotalApple.ToString() + " / 5";
+				break;
 		    case Dimension.Green:
-			    GreenApple--;
+				print(TotalApple);
+				TotalApple--;
+				print(TotalApple);
+				GreenApple--;
 			    GreenAppleCounter.text = GreenApple.ToString();
-			    break;
+				BagCounter.text = TotalApple.ToString() + " / 5";
+				break;
 		    default:
 			    throw new ArgumentOutOfRangeException();
 	    }
