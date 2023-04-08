@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    float moveX = 0f;
-    float moveZ = 0f;
-    [SerializeField]
+	[SerializeField]
     private Sprite red;
     [SerializeField]
     private Sprite blue;
@@ -14,8 +12,13 @@ public class Apple : MonoBehaviour
     private Sprite green;
     [SerializeField]
     private SpriteRenderer Sprite;
-    public GameObject AppleBody;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private float moveSpeed = 5f;
+    
+    private float moveX = 0f;
+    private float moveZ = 0f;
+    
     public void Setup(Dimension dimension, Direction direction)
     {
         print(dimension);
@@ -46,7 +49,6 @@ public class Apple : MonoBehaviour
     void Update()
     {
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
-        float moveSpeed = 30f;
-        AppleBody.transform.position += moveDir * moveSpeed * Time.deltaTime;
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
     }
 }

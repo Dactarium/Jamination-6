@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     public Apple Apple;
     public GameObject AppleSpawn;
     public TextMeshProUGUI RedAppleCounter;
-    public TextMeshProUGUI BlueAppleCounter;
     public TextMeshProUGUI GreenAppleCounter;
+    public TextMeshProUGUI BlueAppleCounter;
+    
+    [SerializeField]
+    private float moveSpeed = 5f;
+    
     private Direction direction = Direction.Up;
     private Dimension appleDimension = Dimension.Red;
     private Apple AppleBullet;
@@ -79,7 +83,6 @@ public class Player : MonoBehaviour
             }
         }
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
-        float moveSpeed = 10f;
         rb.position += moveDir * moveSpeed * Time.deltaTime;
 
         if (tree)

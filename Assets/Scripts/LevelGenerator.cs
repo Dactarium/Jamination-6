@@ -113,11 +113,11 @@ public class LevelGenerator : MonoBehaviour
 						redTree.transform.position = position; 
 						break;
 					case Entity.GreenTree:
-						Tree greenTree = Instantiate(this.redTree, parent);
+						Tree greenTree = Instantiate(this.greenTree, parent);
 						greenTree.transform.position = position; 
 						break;
 					case Entity.BlueTree:
-						Tree blueTree = Instantiate(this.redTree, parent);
+						Tree blueTree = Instantiate(this.blueTree, parent);
 						blueTree.transform.position = position; 
 						break;
 					case Entity.Key:
