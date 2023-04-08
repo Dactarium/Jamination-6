@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7199859163248334744}
   m_Layer: 0
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7199859164274700552
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: havuc
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dadb02dd64946c44c815ca397b522174,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dadb02dd64946c44c815ca397b522174, type: 3}

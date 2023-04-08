@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI RedAppleCounter;
     public TextMeshProUGUI GreenAppleCounter;
     public TextMeshProUGUI BlueAppleCounter;
+    public Camera Camera;
     
     [SerializeField]
     private float moveSpeed = 5f;
@@ -23,6 +24,13 @@ public class Player : MonoBehaviour
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
+    private float angle;
+
+    private bool readyToCollect = false;
+    private GameObject Carrot;
+    [SerializeField]
+    private Transform carrotSlots;
+    public GameObject carrotImage;
 
     private Tree tree;
     [SerializeField]
@@ -52,6 +60,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
         if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
         if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            angle = (angle - 90) % 360;
+            transform.eulerAngles = new Vector3(0, angle, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            angle = (angle + 90) % 360;
+            transform.eulerAngles = new Vector3(0, angle, 0);
+        }
 
         if (Input.GetButtonDown("Fire1")) {
             if(appleDimension == Dimension.Red)
@@ -82,32 +99,38 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
+        Vector3 moveDir = transform.forward * moveZ + transform.right * moveX;
+        moveDir = moveDir.normalized;
         rb.position += moveDir * moveSpeed * Time.deltaTime;
 
         if (tree)
         {
-            if (tree.Dimension == Dimension.Red && Input.GetKeyDown(KeyCode.E)) {
+            if (tree.Dimension == Dimension.Red && Input.GetKeyDown(KeyCode.F)) {
                 if(RedApple < 3)
                 {
                     RedApple++;
                     RedAppleCounter.text = RedApple.ToString();
                 }
             }
-            if (tree.Dimension == Dimension.Blue && Input.GetKeyDown(KeyCode.E)) {
+            if (tree.Dimension == Dimension.Blue && Input.GetKeyDown(KeyCode.F)) {
                 if (BlueApple < 3)
                 {
                     BlueApple++;
                     BlueAppleCounter.text = BlueApple.ToString();
                 }
             }
-            if (tree.Dimension == Dimension.Green && Input.GetKeyDown(KeyCode.E)) {
+            if (tree.Dimension == Dimension.Green && Input.GetKeyDown(KeyCode.F)) {
                 if (GreenApple < 3)
                 {
                     GreenApple++;
                     GreenAppleCounter.text = GreenApple.ToString();
                 }
             } 
+        }
+        if (readyToCollect && Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(carrotImage, carrotSlots);
+            Destroy(Carrot);
         }
 
     }
@@ -121,7 +144,12 @@ public class Player : MonoBehaviour
         {
             tree = other.GetComponent<Tree>();
             UIText.gameObject.SetActive(true);
-        } 
+        }
+        if (other.tag.Equals("Key"))
+        {
+            readyToCollect = true;
+            Carrot = other.gameObject;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -129,6 +157,11 @@ public class Player : MonoBehaviour
         {
             tree = null;
             UIText.gameObject.SetActive(false);
+        }
+        if (other.tag.Equals("Key"))
+        {
+            readyToCollect = false;
+            Carrot = null;
         }
     }
 }

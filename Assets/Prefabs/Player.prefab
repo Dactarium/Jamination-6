@@ -84,7 +84,10 @@ MonoBehaviour:
   RedAppleCounter: {fileID: 0}
   GreenAppleCounter: {fileID: 0}
   BlueAppleCounter: {fileID: 0}
+  Camera: {fileID: 0}
   moveSpeed: 5
+  carrotImage: {fileID: 8329359989547684001, guid: 92d6a7b0202fa454dbcd2251247f85ee,
+    type: 3}
   rb: {fileID: 5382336810237887331}
 --- !u!1 &5382336810302970148
 GameObject:
