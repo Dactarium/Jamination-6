@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI UIText;
     public Apple Apple;
     public GameObject AppleSpawn;
-    private string Direction;
+    public TextMeshProUGUI RedAppleCounter;
+    public TextMeshProUGUI BlueAppleCounter;
+    public TextMeshProUGUI GreenAppleCounter;
+    private Direction direction = Direction.Up;
+    private Dimension appleDimension = Dimension.Red;
     private Apple AppleBullet;
     private int RedApple;
     private int GreenApple;
@@ -28,27 +32,24 @@ public class Player : MonoBehaviour
     {
         float moveX = 0f;
         float moveZ = 0f;
-        /*if (Input.GetKey(KeyCode.W)) { Input.GetAxis("Vertical"); Direction = "Up"; }
-        if (Input.GetKey(KeyCode.S)) { moveZ = -1f; Direction = "Down"; }
-        if (Input.GetKey(KeyCode.A)) { moveX = -1f; Direction = "Left"; }
-        if (Input.GetKey(KeyCode.D)) { moveX = +1f; Direction = "Right"; }
-        */
         moveZ = Mathf.RoundToInt(Input.GetAxis("Vertical"));
         moveX = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
         if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
         {
-            if (moveZ > 0) Direction = "Up";
-            else Direction = "Down";
+            if (moveZ > 0) direction = Direction.Up;
+            else direction = Direction.Down;
         } else
         {
-            if (moveX > 0) Direction = "Right";
-            else Direction = "Left";
+            if (moveX > 0) direction = Direction.Right;
+            else direction = Direction.Left;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
 
         if (Input.GetButtonDown("Fire1")) {
-            AppleBullet = Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation);
-            AppleBullet.ThrowDirection = Direction;
+            Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
         }
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
         float moveSpeed = 10f;
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
                 {
                     RedApple++;
                     tree.Apple--;
+                    RedAppleCounter.text = RedApple.ToString();
                     Debug.Log("Red Apple : " + RedApple);
                 }
             }
@@ -69,6 +71,7 @@ public class Player : MonoBehaviour
                 {
                     BlueApple++;
                     tree.Apple--;
+                    BlueAppleCounter.text = BlueApple.ToString();
                     Debug.Log("Blue Apple : " + BlueApple);
                 }
             }
@@ -77,6 +80,7 @@ public class Player : MonoBehaviour
                 {
                     GreenApple++;
                     tree.Apple--;
+                    GreenAppleCounter.text = GreenApple.ToString();
                     Debug.Log("Green Apple : " + GreenApple);
                 }
             } 
