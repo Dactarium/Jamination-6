@@ -18,17 +18,16 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI GreenAppleCounter;
     public TextMeshProUGUI BlueAppleCounter;
 	public TextMeshProUGUI BagCounter;
-	public Camera Camera;
-    
-    [SerializeField]
+
+	[SerializeField]
     private float moveSpeed = 5f;
     
     private Direction direction = Direction.Up;
     private Dimension appleDimension = Dimension.Red;
-    private int RedApple;
-    private int GreenApple;
-    private int BlueApple;
-	private int TotalApple;
+    private int RedApple = 0;
+    private int GreenApple = 0;
+    private int BlueApple = 0;
+	private int TotalApple => RedApple + BlueApple + GreenApple;
     private float angle;
 
     [SerializeField]
@@ -84,34 +83,10 @@ public class Player : MonoBehaviour
 
 	    #region Shooting Apple
 
-	    if (Input.GetButtonDown("Fire1")) {
-		    if(appleDimension == Dimension.Red)
-		    {
-			    if(RedApple > 0)
-			    {
-				    RedApple--;
-				    ShootApple();
-				    RedAppleCounter.text = RedApple.ToString();
-			    }
-		    }
-		    if (appleDimension == Dimension.Green)
-		    {
-			    if (GreenApple > 0)
-			    {
-				    GreenApple--;
-				    ShootApple();
-				    GreenAppleCounter.text = GreenApple.ToString();
-			    }
-		    }
-		    if (appleDimension == Dimension.Blue)
-		    {
-			    if (BlueApple > 0)
-			    {
-				    BlueApple--;
-				    ShootApple();
-				    BlueAppleCounter.text = BlueApple.ToString();
-			    }
-		    }
+	    if (Input.GetButtonDown("Fire1") && CanSpendCurrentApple())
+	    {
+		    SpendCurrentApple();
+		    ShootApple();
 	    }
 
 	    #endregion
@@ -149,7 +124,7 @@ public class Player : MonoBehaviour
 		    return;
 		if (TotalApple > 4)
 			return;
-		TotalApple++;
+		
 	    count++;
 		BagCounter.text = TotalApple.ToString() + " / 5";
 	    counter.text = count.ToString();
@@ -160,28 +135,19 @@ public class Player : MonoBehaviour
 		switch (appleDimension)
 	    {
 		    case Dimension.Red:
-				print(TotalApple);
-				TotalApple--;
-				print(TotalApple);
 				RedApple--;
 			    RedAppleCounter.text = RedApple.ToString();
-				BagCounter.text = TotalApple.ToString() + " / 5";
+				BagCounter.text = TotalApple + " / 5";
 				break;
 		    case Dimension.Blue:
-				print(TotalApple);
-				TotalApple--;
-				print(TotalApple);
 				BlueApple--;
 			    BlueAppleCounter.text = BlueApple.ToString();
-				BagCounter.text = TotalApple.ToString() + " / 5";
+				BagCounter.text = TotalApple + " / 5";
 				break;
 		    case Dimension.Green:
-				print(TotalApple);
-				TotalApple--;
-				print(TotalApple);
 				GreenApple--;
 			    GreenAppleCounter.text = GreenApple.ToString();
-				BagCounter.text = TotalApple.ToString() + " / 5";
+				BagCounter.text = TotalApple + " / 5";
 				break;
 		    default:
 			    throw new ArgumentOutOfRangeException();
@@ -219,7 +185,7 @@ public class Player : MonoBehaviour
 
     private void ShootApple()
     {
-        Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction);
+        Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction, transform);
     }
 
     private async void Rotate(float target)

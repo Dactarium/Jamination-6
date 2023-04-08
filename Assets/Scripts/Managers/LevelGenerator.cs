@@ -130,9 +130,7 @@ public class LevelGenerator : Helpers.Singleton<LevelGenerator>
 						Transform block = Instantiate(blocks[Random.Range(0, blocks.Length)], parent).transform;
 						block.position = position;
 						if(block.TryGetComponent(out Entity entity))
-						{
 							entity.Model.eulerAngles = angle;
-						}
 						break;
 					case EntityType.Player:
 						player.transform.position = position;

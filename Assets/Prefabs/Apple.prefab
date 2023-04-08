@@ -51,6 +51,7 @@ MonoBehaviour:
   green: {fileID: 21300000, guid: 1c199b6f5e73d6a488c7818feee289a1, type: 3}
   Sprite: {fileID: 5472697888099990205}
   moveSpeed: 12.5
+  rotateSpeed: 360
 --- !u!135 &6621084646878421823
 SphereCollider:
   m_ObjectHideFlags: 0
