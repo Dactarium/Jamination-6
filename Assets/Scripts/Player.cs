@@ -20,14 +20,11 @@ public class Player : MonoBehaviour
     
     private Direction direction = Direction.Up;
     private Dimension appleDimension = Dimension.Red;
-    private Apple AppleBullet;
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
     private float angle;
 
-    private bool readyToCollect = false;
-    private GameObject Carrot;
     [SerializeField]
     private Transform carrotSlots;
     public GameObject carrotImage;
@@ -127,11 +124,6 @@ public class Player : MonoBehaviour
                 }
             } 
         }
-        if (readyToCollect && Input.GetKeyDown(KeyCode.F))
-        {
-            Instantiate(carrotImage, carrotSlots);
-            Destroy(Carrot);
-        }
 
     }
     private void shootApple()
@@ -147,8 +139,8 @@ public class Player : MonoBehaviour
         }
         if (other.tag.Equals("Key"))
         {
-            readyToCollect = true;
-            Carrot = other.gameObject;
+            Destroy(other.gameObject);
+            Instantiate(carrotImage, carrotSlots);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -157,11 +149,6 @@ public class Player : MonoBehaviour
         {
             tree = null;
             UIText.gameObject.SetActive(false);
-        }
-        if (other.tag.Equals("Key"))
-        {
-            readyToCollect = false;
-            Carrot = null;
         }
     }
 }
