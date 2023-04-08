@@ -80,13 +80,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIText: {fileID: 0}
-  Apple: {fileID: 0}
+  Apple: {fileID: 6621084646878421820, guid: bb618818ede65cd40a32b705d4b8e35e, type: 3}
   AppleSpawn: {fileID: 5660316557920897091}
   RedAppleCounter: {fileID: 0}
   GreenAppleCounter: {fileID: 0}
   BlueAppleCounter: {fileID: 0}
   BagCounter: {fileID: 0}
-  moveSpeed: 5
+  runSpeed: 7.5
+  walkSpeed: 5
+  staminaCost: 0.5
+  staminaRegen: 3
+  maxStamina: 40
+  runStartStamina: 7.5
   carrotSlots: {fileID: 0}
   carrotImage: {fileID: 8329359989547684001, guid: 92d6a7b0202fa454dbcd2251247f85ee,
     type: 3}

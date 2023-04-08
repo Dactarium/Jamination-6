@@ -19,10 +19,23 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI BlueAppleCounter;
 	public TextMeshProUGUI BagCounter;
 
-	[SerializeField]
+	
     private float moveSpeed = 5f;
-    
-    private Direction direction = Direction.Up;
+	[SerializeField]
+	private float runSpeed = 7.5f;
+	[SerializeField]
+	private float walkSpeed = 5f;
+	private float stamina = 40f;
+	[SerializeField]
+	private float staminaCost = 0.5f;
+	[SerializeField]
+	private float staminaRegen = 1f;
+	[SerializeField]
+	private float maxStamina = 40f;
+	[SerializeField]
+	private float runStartStamina = 0;
+
+	private Direction direction = Direction.Up;
     private Dimension appleDimension = Dimension.Red;
     private int RedApple = 0;
     private int GreenApple = 0;
@@ -33,6 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform carrotSlots;
     public GameObject carrotImage;
+	private int carrotAmount;
 
     private Tree tree;
 
@@ -41,19 +55,26 @@ public class Player : MonoBehaviour
     
     [SerializeField]
     private float rotateDuration = 0.25f;
-    
-    [SerializeField]
+
+	[SerializeField]
     private Rigidbody rb;
 
     [SerializeField]
     private Animator animator;
-
-    private bool isRotating = false;
+    
+	private bool isRunning = false;
+	private bool isRotating = false;
 
     public Action<Vector3> OnRotate;
 
     private void Update()
     {
+		print(stamina);
+		if (!isRunning && stamina < maxStamina)
+        {
+			stamina += staminaRegen * Time.deltaTime;
+			if (stamina > maxStamina) stamina = maxStamina;
+        }
 	    HandleMovement();
 	    HandleInputs();
     }
@@ -109,11 +130,29 @@ public class Player : MonoBehaviour
 		    }
 	    }
 
-	    #endregion
+		#endregion
+		if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > runStartStamina)
+        {
+			isRunning = true;
+		}
+		if (isRunning)
+        {
+			stamina -= staminaCost;
+			moveSpeed = runSpeed;
+			if (stamina < 0)
+			{
+				moveSpeed = walkSpeed;
+				isRunning = false;
+			}
+		}
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+			isRunning = false;
+		}
 
-	    #region Changing Dimension
+			#region Changing Dimension
 
-	    if(Input.GetButtonDown("Dimension") && CanSpendCurrentApple() && appleDimension != GameManager.Instance.CurrentDimension)
+			if (Input.GetButtonDown("Dimension") && CanSpendCurrentApple() && appleDimension != GameManager.Instance.CurrentDimension)
 	    {
 		    SpendCurrentApple();
 		    GameManager.Instance.ChangeDimension(appleDimension);
@@ -237,10 +276,20 @@ public class Player : MonoBehaviour
         }
         if (other.tag.Equals("Key"))
         {
+			carrotAmount++;
             Destroy(other.gameObject);
             Instantiate(carrotImage, carrotSlots);
         }
-    }
+		if (other.tag.Equals("Door"))
+		{
+			if(carrotAmount > 2)
+            {
+				carrotAmount = 0;
+				carrotSlots.gameObject.SetActive(false);
+				other.gameObject.SetActive(false);
+			}
+		}
+	}
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.Equals("Tree"))
