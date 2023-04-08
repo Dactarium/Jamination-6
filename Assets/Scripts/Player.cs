@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     public TextMeshProUGUI UIText;
+    public Apple Apple;
+    public GameObject AppleSpawn;
+    private string Direction;
+    private Apple AppleBullet;
     private int RedApple;
     private int GreenApple;
     private int BlueApple;
@@ -24,10 +28,28 @@ public class Player : MonoBehaviour
     {
         float moveX = 0f;
         float moveZ = 0f;
-        if (Input.GetKey(KeyCode.W)) moveZ = +1f;
-        if (Input.GetKey(KeyCode.S)) moveZ = -1f;
-        if (Input.GetKey(KeyCode.A)) moveX = -1f;
-        if (Input.GetKey(KeyCode.D)) moveX = +1f;
+        /*if (Input.GetKey(KeyCode.W)) { Input.GetAxis("Vertical"); Direction = "Up"; }
+        if (Input.GetKey(KeyCode.S)) { moveZ = -1f; Direction = "Down"; }
+        if (Input.GetKey(KeyCode.A)) { moveX = -1f; Direction = "Left"; }
+        if (Input.GetKey(KeyCode.D)) { moveX = +1f; Direction = "Right"; }
+        */
+        moveZ = Mathf.RoundToInt(Input.GetAxis("Vertical"));
+        moveX = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
+        if(Mathf.Abs(moveZ) > Mathf.Abs(moveX))
+        {
+            if (moveZ > 0) Direction = "Up";
+            else Direction = "Down";
+        } else
+        {
+            if (moveX > 0) Direction = "Right";
+            else Direction = "Left";
+        }
+
+
+        if (Input.GetButtonDown("Fire1")) {
+            AppleBullet = Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation);
+            AppleBullet.ThrowDirection = Direction;
+        }
         Vector3 moveDir = new Vector3(moveX, 0, moveZ).normalized;
         float moveSpeed = 10f;
         rb.position += moveDir * moveSpeed * Time.deltaTime;
