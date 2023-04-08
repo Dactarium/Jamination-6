@@ -88,7 +88,7 @@ public class LevelGenerator : MonoBehaviour
 		for(int y = 0; y < lenY; y++)
 			for(int x = 0; x < lenX; x++)
 			{
-				Vector3 position = new Vector3(x - lenX / 2f, 0, y - lenY / 2f);
+				Vector3 position = new Vector3(x - lenX / 2f, 0, lenY - y - lenY / 2f);
 				switch(grid[x, y])
 				{
 					case Entity.__:

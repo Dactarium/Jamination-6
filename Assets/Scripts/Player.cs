@@ -91,9 +91,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Red Apple : " + RedApple);
-        Debug.Log("Blue Apple : " + BlueApple);
-        Debug.Log("Green Apple : " + GreenApple);
         if (other.tag.Equals("Tree")) 
         {
             tree = other.GetComponent<Tree>();
