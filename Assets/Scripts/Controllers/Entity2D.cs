@@ -1,7 +1,7 @@
-using System;
+using Managers;
 using UnityEngine;
 
-namespace DefaultNamespace.Managers
+namespace Controllers
 {
 	public class Entity2D : Entity
 	{

@@ -1,7 +1,7 @@
-using System;
+using Enums;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Controllers
 {
 	public class Key : Entity
 	{

@@ -1,8 +1,8 @@
 using System;
+using Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace DefaultNamespace.Controllers
+namespace Controllers
 {
 	public class DimensionController : MonoBehaviour
 	{

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Controllers
 {
 	public class Entity : MonoBehaviour
 	{

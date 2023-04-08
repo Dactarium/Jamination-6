@@ -1,9 +1,9 @@
-using System;
-using DefaultNamespace.Controllers;
+using Controllers;
+using Enums;
 using Helpers;
 using UnityEngine;
 
-namespace DefaultNamespace.Managers
+namespace Managers
 {
 	public class GameManager : Singleton<GameManager>
 	{
