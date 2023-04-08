@@ -10,5 +10,4 @@ public class Tree : MonoBehaviour
         get;
         private set;
     }
-    public int Apple = 3;
 }
