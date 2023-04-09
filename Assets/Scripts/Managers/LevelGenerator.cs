@@ -160,6 +160,7 @@ namespace Managers {
 		private void CreateWaypoint(int x, int y, ref Waypoint[,] waypoints, ref WaypointRoot waypointRoot, Vector3 position)
 		{
 			Waypoint waypoint = new GameObject("Waypoint").AddComponent<Waypoint>();
+			waypoint.Radius = 0.2f;
 			waypoints[x, y] = waypoint;
 			waypoint.transform.SetParent(waypointRoot.transform);
 			waypoint.transform.position = position;
