@@ -76,6 +76,12 @@ namespace Controllers
 		[SerializeField]
 		private AudioClip carrotPick;
 
+		[SerializeField]
+		private AudioClip appleThrow;
+
+		[SerializeField]
+		private AudioClip rabbiteatCarrot;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -306,6 +312,8 @@ namespace Controllers
 		
 		private void ShootApple()
 		{
+			audio.clip = appleThrow;
+			audio.Play();
 			Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction, transform);
 		}
 
@@ -343,6 +351,8 @@ namespace Controllers
 			{
 				if(carrotAmount >= door.RequiredKey)
 				{
+					audio.clip = rabbiteatCarrot;
+					audio.Play();
 					carrotAmount = 0;
 					carrotSlots.gameObject.SetActive(false);
 					other.gameObject.SetActive(false);
