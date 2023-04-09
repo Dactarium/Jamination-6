@@ -20,16 +20,13 @@ namespace Controllers
 
 		private Dimension _dimension = Dimension.Red;
 
-		private void OnEnable()
+		protected override void OnEnable()
 		{
-			ChangeDimension(_dimension);
-			ChangeRoute();
-		}
-
-		protected override void Start()
-		{
+			base.OnEnable();
 			target = GameManager.Instance.Player.transform;
-			base.Start();
+			ChangeDimension(_dimension);
+			IsTargetChanged();
+			ChangeRoute();
 		}
 
 		protected override void Update()

@@ -59,19 +59,13 @@ namespace Managers {
 			red.SetParent(parent);
 			green.SetParent(parent);
 			blue.SetParent(parent);
-
-			if(level.Start is not Dimension.Red)
-				red.gameObject.SetActive(false);
-			if(level.Start is not Dimension.Green)
-				green.gameObject.SetActive(false);
-			if(level.Start is not Dimension.Blue)
-				blue.gameObject.SetActive(false);
-			
 		}
 
 		private Transform GenerateDimension(Dimension dimension, Level level, ref DimensionController dimensionController)
 		{
 			Transform parent = new GameObject($"{dimension}").transform;
+			
+			parent.gameObject.SetActive(dimension == level.Start);
 			
 			dimensionController.OnDimensionChange += (previous, next) =>
 			{
