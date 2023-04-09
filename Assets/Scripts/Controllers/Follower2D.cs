@@ -44,8 +44,10 @@ namespace Controllers
 			Waypoint nearestWaypoint = waypointRoot.GetNearestWaypoint(transform.position);
 			_route = WaypointNavigator.Navigate(nearestWaypoint, _targetWaypoint);
 			_route.Pop();
-			_targetPosition = _route.Pop().RandomPosition;
-        
+			if(_route is { Count: > 0 })
+				_targetPosition = _route.Pop().RandomPosition;
+			else
+				_targetPosition = target.position;
 		}
 
 		protected void Move(){
@@ -61,8 +63,11 @@ namespace Controllers
 		}
 
     
-		protected virtual void OnReached(){
-			if(_route != null && _route.Count > 0)_targetPosition = _route.Pop().RandomPosition;
+		protected virtual void OnReached()
+		{
+			if(_route is { Count: > 0 }) _targetPosition = _route.Pop().RandomPosition;
+			else _targetPosition = target.position;
+			
 			if(IsTargetChanged()) ChangeRoute();
 		}
     

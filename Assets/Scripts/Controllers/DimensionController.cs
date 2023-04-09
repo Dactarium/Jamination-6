@@ -1,6 +1,8 @@
 using System;
 using Enums;
+using Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Waypoint_System.Scripts;
 
 namespace Controllers
@@ -21,8 +23,23 @@ namespace Controllers
 		private WaypointRoot redWaypointRoot;
 		private WaypointRoot greenWaypointRoot;
 		private WaypointRoot blueWaypointRoot;
+
+		private bool[,] redEmptys;
+		private bool[,] greenEmptys;
+		private bool[,] blueEmptys;
+
+		public Vector2Int RedSpawn   { get; private set; }
+		public Vector2Int GreenSpawn { get; private set; }
+		public Vector2Int BlueSpawn  { get; private set; }
 		
 		public void Setup(Dimension dimension) => Dimension = dimension;
+
+		public void SetSize(int x, int y)
+		{
+			redEmptys = new bool[x, y];
+			greenEmptys = new bool[x, y];
+			blueEmptys = new bool[x, y];
+		}
 
 		public void ChangeDimension(Dimension dimension)
 		{
@@ -46,6 +63,63 @@ namespace Controllers
 				default:
 					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
 			}
+		}
+		public void SetSpawnIndex(Vector2Int gridIndex, Dimension? dimension = null)
+		{
+			if(dimension is null or Dimension.Red)
+				if(redEmptys[gridIndex.x, gridIndex.y])
+					RedSpawn = gridIndex;
+			
+			if(dimension is null or Dimension.Green)
+				if(greenEmptys[gridIndex.x, gridIndex.y])
+					GreenSpawn = gridIndex;
+			
+			if(dimension is null or Dimension.Blue)
+				if(blueEmptys[gridIndex.x, gridIndex.y])
+					BlueSpawn = gridIndex;
+		}
+
+		public void SetEmpty(int x, int y, Dimension dimension)
+		{
+			var lenY = GameManager.GridSize.y - 1;
+			switch(dimension)
+			{
+				case Dimension.Red:
+					redEmptys[x, lenY - y] = true;
+					break;
+				case Dimension.Green:
+					greenEmptys[x, lenY - y] = true;
+					break;
+				case Dimension.Blue:
+					blueEmptys[x, lenY - y] = true;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+			}
+		}
+		public Vector3 GetSpawnPoint(EntityType entity, Dimension dimension)
+		{
+			switch(entity)
+			{
+				case EntityType.Player:
+					switch(dimension)
+					{
+						case Dimension.Red:
+							return new Vector3(RedSpawn.x - GameManager.GridSize.x / 2f, 0, RedSpawn.y - GameManager.GridSize.y / 2f);
+						case Dimension.Green:
+							return new Vector3(GreenSpawn.x - GameManager.GridSize.x / 2f, 0, GreenSpawn.y - GameManager.GridSize.y / 2f);
+						case Dimension.Blue:
+							return new Vector3(BlueSpawn.x - GameManager.GridSize.x / 2f, 0, BlueSpawn.y - GameManager.GridSize.y / 2f);
+						default:
+							throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+					}
+				case EntityType.Wolf:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(entity), entity, null);
+			}
+
+			return Vector3.zero;
 		}
 	}
 }

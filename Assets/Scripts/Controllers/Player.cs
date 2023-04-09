@@ -64,8 +64,9 @@ namespace Controllers
 		private bool isRunning = false;
 		private bool isRotating = false;
 
+		private Vector2Int _lastGridIndex;
+		
 		public Action<Vector3> OnRotate;
-
 
 		private void Start()
 		{
@@ -82,6 +83,7 @@ namespace Controllers
 			}
 			HandleMovement();
 			HandleInputs();
+			CheckGridIndex();
 		}
 
 		private void HandleInputs()
@@ -168,57 +170,13 @@ namespace Controllers
 			{
 				SpendCurrentApple();
 				GameManager.Instance.ChangeDimension(appleDimension);
+				transform.position = GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, appleDimension);
 				UIText.gameObject.SetActive(false);
 			}
 
 			#endregion
 		}
-
-		private void CollectingApple(ref int count, ref TextMeshProUGUI counter)
-		{
-			if(count > 2)
-				return;
-			if (TotalApple > 4)
-				return;
 		
-			count++;
-			BagCounter.text = TotalApple.ToString() + " / 5";
-			counter.text = count.ToString();
-		}
-
-		private void SpendCurrentApple()
-		{
-			switch (appleDimension)
-			{
-				case Dimension.Red:
-					RedApple--;
-					RedAppleCounter.text = RedApple.ToString();
-					BagCounter.text = TotalApple + " / 5";
-					break;
-				case Dimension.Blue:
-					BlueApple--;
-					BlueAppleCounter.text = BlueApple.ToString();
-					BagCounter.text = TotalApple + " / 5";
-					break;
-				case Dimension.Green:
-					GreenApple--;
-					GreenAppleCounter.text = GreenApple.ToString();
-					BagCounter.text = TotalApple + " / 5";
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
-    
-		private bool CanSpendCurrentApple()
-		{
-			return appleDimension switch { 
-				Dimension.Red => RedApple > 0,
-				Dimension.Green => GreenApple > 0,
-				Dimension.Blue => BlueApple > 0,
-				_ => false};
-		}
-
 		private void HandleMovement()
 		{
 			Vector2 move = Vector2.zero; 
@@ -264,6 +222,66 @@ namespace Controllers
 			rb.position += moveDir * moveSpeed * Time.deltaTime;
 		}
 
+		private void CheckGridIndex()
+		{
+			Vector2Int gridIndex = new Vector2Int(Mathf.RoundToInt(transform.position.x + GameManager.GridSize.x / 2f), Mathf.RoundToInt(transform.position.z + GameManager.GridSize.y / 2f));
+			gridIndex.x = Mathf.Clamp(gridIndex.x, 0, GameManager.GridSize.x - 1);
+			gridIndex.y = Mathf.Clamp(gridIndex.y, 0, GameManager.GridSize.y - 1);
+			if(_lastGridIndex == gridIndex)
+				return;
+
+			_lastGridIndex = gridIndex;
+
+			print(transform.position);
+			print(GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, appleDimension));
+			GameManager.Instance.DimensionController.SetSpawnIndex(gridIndex);
+		}
+		
+		private void CollectingApple(ref int count, ref TextMeshProUGUI counter)
+		{
+			if(count > 2)
+				return;
+			if (TotalApple > 4)
+				return;
+		
+			count++;
+			BagCounter.text = TotalApple.ToString() + " / 5";
+			counter.text = count.ToString();
+		}
+
+		private void SpendCurrentApple()
+		{
+			switch (appleDimension)
+			{
+				case Dimension.Red:
+					RedApple--;
+					RedAppleCounter.text = RedApple.ToString();
+					BagCounter.text = TotalApple + " / 5";
+					break;
+				case Dimension.Blue:
+					BlueApple--;
+					BlueAppleCounter.text = BlueApple.ToString();
+					BagCounter.text = TotalApple + " / 5";
+					break;
+				case Dimension.Green:
+					GreenApple--;
+					GreenAppleCounter.text = GreenApple.ToString();
+					BagCounter.text = TotalApple + " / 5";
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+    
+		private bool CanSpendCurrentApple()
+		{
+			return appleDimension switch { 
+				Dimension.Red => RedApple > 0,
+				Dimension.Green => GreenApple > 0,
+				Dimension.Blue => BlueApple > 0,
+				_ => false};
+		}
+		
 		private void ShootApple()
 		{
 			Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction, transform);
@@ -283,6 +301,7 @@ namespace Controllers
 			}
 			isRotating = false;
 		}
+		
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.tag.Equals("Tree")) 

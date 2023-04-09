@@ -43,17 +43,18 @@ namespace Managers {
 		[SerializeField]
 		private Door door;
 
-		public DimensionController GenerateLevel(int index)
+		public void GenerateLevel(int index)
 		{
 			Level level = Levels[index];
 		
 			Transform parent = new GameObject($"Level {index}").transform;
 			DimensionController dimensionController = parent.AddComponent<DimensionController>();
 			dimensionController.Setup(level.Start);
+			GameManager.Instance.SetDimensionController(dimensionController);
 
-			Transform red = GenerateDimension(Dimension.Red, level.Red, ref dimensionController);
-			Transform green = GenerateDimension(Dimension.Green, level.Green, ref dimensionController);
-			Transform blue = GenerateDimension(Dimension.Blue, level.Blue, ref dimensionController);
+			Transform red = GenerateDimension(Dimension.Red, level, ref dimensionController);
+			Transform green = GenerateDimension(Dimension.Green, level, ref dimensionController);
+			Transform blue = GenerateDimension(Dimension.Blue, level, ref dimensionController);
 		
 			red.SetParent(parent);
 			green.SetParent(parent);
@@ -66,10 +67,9 @@ namespace Managers {
 			if(level.Start is not Dimension.Blue)
 				blue.gameObject.SetActive(false);
 			
-			return dimensionController;
 		}
 
-		private Transform GenerateDimension(Dimension dimension, TextAsset data, ref DimensionController dimensionController)
+		private Transform GenerateDimension(Dimension dimension, Level level, ref DimensionController dimensionController)
 		{
 			Transform parent = new GameObject($"{dimension}").transform;
 			
@@ -83,7 +83,15 @@ namespace Managers {
 			};
 			
 
-			EntityType[,] grid = PatternConverter.convert<EntityType>(data.text);
+			EntityType[,] grid = PatternConverter.convert<EntityType>(dimension switch {
+				Dimension.Red => level.Red.text, 
+				Dimension.Green => level.Green.text,
+				Dimension.Blue => level.Blue.text
+			});
+			
+			if(dimension == level.Start)
+				GameManager.Instance.SetGridSize(grid.GetLength(0), grid.GetLength(1));
+			
 			Waypoint[,] waypoints = new Waypoint[grid.GetLength(0), grid.GetLength(1)];
 
 			int lenX = grid.GetLength(0);
@@ -97,12 +105,13 @@ namespace Managers {
 			for(int y = 0; y < lenY; y++)
 				for(int x = 0; x < lenX; x++)
 				{
-					Vector3 position = new Vector3(x - lenX / 2f, 0, lenY - y - lenY / 2f);
+					Vector3 position = new Vector3(x - lenX / 2f, 0, (lenY - y - 1) - lenY / 2f);
 					Vector3 angle = new Vector3(0, Random.Range(0f, 360f), 0);
 					switch(grid[x, y])
 					{
 						case EntityType.__:
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.Block:
 							Transform block = Instantiate(blocks[Random.Range(0, blocks.Length)], parent).transform;
@@ -111,39 +120,49 @@ namespace Managers {
 								entity.Model.eulerAngles = angle;
 							break;
 						case EntityType.Player:
-							player.transform.position = position;
+							if(level.Start == dimension)
+								player.transform.position = position;
+							dimensionController.SetSpawnIndex(new Vector2Int(x, y), dimension);
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
+							
 							break;
 						case EntityType.Wolf:
 							GameObject wolf = Instantiate(this.wolf, parent);
 							wolf.transform.position = position;
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.Lumberjack:
 							GameObject lumberjack = Instantiate(this.lumberjack, parent);
 							lumberjack.transform.position = position;
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.RedTree:
 							Tree redTree = Instantiate(this.redTree, parent);
 							redTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.GreenTree:
 							Tree greenTree = Instantiate(this.greenTree, parent);
 							greenTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.BlueTree:
 							Tree blueTree = Instantiate(this.blueTree, parent);
 							blueTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.Key:
 							Key key = Instantiate(this.key, parent);
 							key.transform.position = position;
 							key.Model.eulerAngles = angle;
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
+							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.Door:
 							Door door = Instantiate(this.door, parent);
@@ -182,6 +201,10 @@ namespace Managers {
 				waypoint.Connect(waypoints[x - 1, y - 1]);
 				waypoints[x - 1, y - 1].Connect(waypoint);
 			}
+		}
+		private void SetEmpty(int x, int y, ref DimensionController dimensionController, Dimension dimension)
+		{
+			
 		}
 	}
 
