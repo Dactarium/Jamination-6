@@ -32,7 +32,7 @@ namespace Managers
 		private void Start()
 		{
 			Time.timeScale = 1;
-			LevelGenerator.Instance.GenerateLevel(0);
+			LevelGenerator.Instance.GenerateLevel(1);
 			DimensionController.OnDimensionChange += (previous, next) => { CurrentDimension = next; };
 			
 			CurrentDimension = DimensionController.Dimension;
