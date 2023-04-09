@@ -82,6 +82,9 @@ namespace Controllers
 		[SerializeField]
 		private AudioClip rabbiteatCarrot;
 
+		[SerializeField]
+		private AudioClip eatApple;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -285,16 +288,22 @@ namespace Controllers
 			{
 				case Dimension.Red:
 					RedApple--;
+					audio.clip = eatApple;
+					audio.Play();
 					RedAppleCounter.text = RedApple.ToString();
 					BagCounter.text = TotalApple + " / 5";
 					break;
 				case Dimension.Blue:
 					BlueApple--;
+					audio.clip = eatApple;
+					audio.Play();
 					BlueAppleCounter.text = BlueApple.ToString();
 					BagCounter.text = TotalApple + " / 5";
 					break;
 				case Dimension.Green:
 					GreenApple--;
+					audio.clip = eatApple;
+					audio.Play();
 					GreenAppleCounter.text = GreenApple.ToString();
 					BagCounter.text = TotalApple + " / 5";
 					break;
