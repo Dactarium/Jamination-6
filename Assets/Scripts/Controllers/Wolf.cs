@@ -1,8 +1,10 @@
 using System;
+using System.Threading.Tasks;
 using Enums;
 using Managers;
 using UnityEngine;
 using Enums;
+using UnityEngine.SceneManagement;
 using Waypoint_System.Scripts;
 
 namespace Controllers
@@ -71,6 +73,20 @@ namespace Controllers
 			waypointRoot = GameManager.Instance.DimensionController.GetWaypointRoot(dimension);
 			animator.SetFloat("Dimension", (int)dimension / 3f);
 			_dimension = dimension;
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			if(other.tag.Equals("Player"))
+			{
+				ReloadScene();
+			}
+		}
+
+		private async void ReloadScene()
+		{
+			await Task.Delay(500);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 }

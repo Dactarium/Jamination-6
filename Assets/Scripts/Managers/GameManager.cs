@@ -45,6 +45,18 @@ namespace Managers
 				ghost.SetWaypointRoot(DimensionController.GetWaypointRoot(ghost.Dimension));
 			}
 		}
+
+		[ContextMenu("Reset Progress")]
+		public void ResetProgress()
+		{
+			PlayerPrefs.SetInt("Level", 0);
+		}
+		
+		[ContextMenu("Increase Progress")]
+		public void IncreaseProgress()
+		{
+			PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 0) + 1);
+		}
 		
 		public void ChangeDimension(Dimension dimension) => DimensionController.ChangeDimension(dimension);
 

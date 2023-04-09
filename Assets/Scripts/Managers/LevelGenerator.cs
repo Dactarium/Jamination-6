@@ -49,8 +49,11 @@ namespace Managers {
 		
 		public void GenerateLevel(int index)
 		{
-			if(index > Levels.Count)
+			if(index >= Levels.Count)
+			{
+				PlayerPrefs.SetInt("Level", 0);
 				index = 0;
+			}
 			
 			Level level = Levels[index];
 		
