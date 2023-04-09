@@ -1034,6 +1034,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7491199805070003159, guid: 9d7fa25142cf3e8469bacb561052fe19,
+        type: 3}
+      propertyPath: m_Name
+      value: Bag
+      objectReference: {fileID: 0}
     - target: {fileID: 7491199805656538980, guid: 9d7fa25142cf3e8469bacb561052fe19,
         type: 3}
       propertyPath: m_AnchorMax.y
