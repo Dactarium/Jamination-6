@@ -136,6 +136,9 @@ namespace Controllers
 			}
 
 			#endregion
+
+			#region Running
+
 			if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > runStartStamina)
 			{
 				isRunning = true;
@@ -155,6 +158,9 @@ namespace Controllers
 				isRunning = false;
 				moveSpeed = walkSpeed;
 			}
+
+			#endregion
+			
 
 			#region Changing Dimension
 
