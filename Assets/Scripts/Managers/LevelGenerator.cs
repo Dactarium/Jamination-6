@@ -49,6 +49,9 @@ namespace Managers {
 		
 		public void GenerateLevel(int index)
 		{
+			if(index > Levels.Count)
+				index = 0;
+			
 			Level level = Levels[index];
 		
 			Transform parent = new GameObject($"Level {index}").transform;
