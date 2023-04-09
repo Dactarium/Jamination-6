@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
 	    }
 
 		#endregion
+
+		#region Running
 		if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > runStartStamina)
         {
 			isRunning = true;
@@ -144,10 +146,11 @@ public class Player : MonoBehaviour
         {
 			isRunning = false;
 		}
+        #endregion
 
-			#region Changing Dimension
+        #region Changing Dimension
 
-			if (Input.GetButtonDown("Dimension") && CanSpendCurrentApple() && appleDimension != GameManager.Instance.CurrentDimension)
+        if (Input.GetButtonDown("Dimension") && CanSpendCurrentApple() && appleDimension != GameManager.Instance.CurrentDimension)
 	    {
 		    SpendCurrentApple();
 		    GameManager.Instance.ChangeDimension(appleDimension);
