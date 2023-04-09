@@ -17,6 +17,8 @@ namespace Controllers
 		protected Stack<Waypoint> _route;
 
 		protected Vector3 _targetPosition;
+
+		protected Vector3 direction;
 		protected override void Start()
 		{
 			base.Start();
@@ -24,7 +26,7 @@ namespace Controllers
 			ChangeRoute();
 		}
 
-		void Update()
+		protected virtual void Update()
 		{
 			Move();
 		}
@@ -51,7 +53,7 @@ namespace Controllers
 				OnReached();
 			} 
 
-			Vector3 direction = (_targetPosition - transform.position).normalized;
+			direction = (_targetPosition - transform.position).normalized;
 
 			transform.position += direction * Time.deltaTime * speed;
 
