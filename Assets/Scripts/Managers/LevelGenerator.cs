@@ -81,6 +81,7 @@ namespace Managers {
 				if(next == dimension)
 					parent.gameObject.SetActive(true);
 			};
+			dimensionController.SetDimensionTransform(dimension, parent);
 			
 
 			EntityType[,] grid = PatternConverter.convert<EntityType>(data.text);

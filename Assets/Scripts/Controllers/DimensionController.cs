@@ -21,8 +21,30 @@ namespace Controllers
 		private WaypointRoot redWaypointRoot;
 		private WaypointRoot greenWaypointRoot;
 		private WaypointRoot blueWaypointRoot;
-		
+
+		private Transform red;
+		private Transform green;
+		private Transform blue;
+
 		public void Setup(Dimension dimension) => Dimension = dimension;
+
+		public void SetDimensionTransform(Dimension dimension, Transform transform) 
+		{
+			switch (dimension)
+			{
+				case Dimension.Red:
+					red = transform;
+					break;
+				case Dimension.Green:
+					green = transform;
+					break;
+				case Dimension.Blue:
+					blue = transform;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+			}
+		}
 
 		public void ChangeDimension(Dimension dimension)
 		{
@@ -43,6 +65,21 @@ namespace Controllers
 				case Dimension.Blue:
 					blueWaypointRoot = waypointRoot;
 					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+			}
+		}
+
+		public Transform GetDimensionTransform(Dimension dimension)
+        {
+			switch (dimension)
+			{
+				case Dimension.Red:
+					return red;
+				case Dimension.Green:
+					return green;
+				case Dimension.Blue:
+					return blue;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
 			}

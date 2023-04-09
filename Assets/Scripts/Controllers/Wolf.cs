@@ -21,7 +21,10 @@ namespace Controllers
 		public void appleTouch(Dimension dimension)
         {
 			print(dimension);
-        }
+			Transform parent = GameManager.Instance.DimensionController.GetDimensionTransform(dimension);
+			transform.SetParent(parent);
+			
+		}
 
 
     }
