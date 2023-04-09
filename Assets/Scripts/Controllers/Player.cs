@@ -60,7 +60,7 @@ namespace Controllers
 
 		[SerializeField]
 		private Animator animator;
-    
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -252,9 +252,13 @@ namespace Controllers
 			}
 
 			if(move.magnitude > 0)
+			{
 				animator.SetBool("Walk", true);
+			}
 			else
+			{
 				animator.SetBool("Walk", false);
+			}
 	    
 			Vector3 moveDir = (move.y * transform.forward + move.x * transform.right).normalized;
 			rb.position += moveDir * moveSpeed * Time.deltaTime;
