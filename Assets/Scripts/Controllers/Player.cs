@@ -76,6 +76,9 @@ namespace Controllers
 		[SerializeField]
 		private AudioClip carrotPick;
 
+		[SerializeField]
+		private AudioClip appleThrow;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -306,6 +309,8 @@ namespace Controllers
 		
 		private void ShootApple()
 		{
+			audio.clip = appleThrow;
+			audio.Play();
 			Instantiate(Apple, AppleSpawn.transform.position, AppleSpawn.transform.rotation).Setup(appleDimension, direction, transform);
 		}
 

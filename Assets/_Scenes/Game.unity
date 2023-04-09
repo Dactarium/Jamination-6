@@ -752,7 +752,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -883,6 +883,11 @@ PrefabInstance:
       propertyPath: BagCounter
       value: 
       objectReference: {fileID: 1078870651}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
+      propertyPath: appleThrow
+      value: 
+      objectReference: {fileID: 8300000, guid: d1659354ca5018b4b875a18b1b46eb9c, type: 3}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
       propertyPath: carrotSlots
