@@ -42,7 +42,11 @@ namespace Managers {
 
 		[SerializeField]
 		private Door door;
-
+		
+		List<Door> _doors = new List<Door>();
+		private int _keyCount = 0;
+		
+		
 		public void GenerateLevel(int index)
 		{
 			Level level = Levels[index];
@@ -52,13 +56,20 @@ namespace Managers {
 			dimensionController.Setup(level.Start);
 			GameManager.Instance.SetDimensionController(dimensionController);
 
+			_keyCount = 0;
+
 			Transform red = GenerateDimension(Dimension.Red, level, ref dimensionController);
 			Transform green = GenerateDimension(Dimension.Green, level, ref dimensionController);
 			Transform blue = GenerateDimension(Dimension.Blue, level, ref dimensionController);
-		
+
 			red.SetParent(parent);
 			green.SetParent(parent);
 			blue.SetParent(parent);
+
+			foreach (var door in _doors)
+			{
+				door.RequiredKey = _keyCount;
+			}
 		}
 
 		private Transform GenerateDimension(Dimension dimension, Level level, ref DimensionController dimensionController)
@@ -96,12 +107,23 @@ namespace Managers {
 			waypointRoot.transform.SetParent(parent);
 			
 			dimensionController.SetWaypointRoot(dimension, waypointRoot);
+
 			
-			for(int y = 0; y < lenY; y++)
-				for(int x = 0; x < lenX; x++)
+			for(int y = -1; y < lenY + 1; y++)
+				for(int x = -1; x < lenX + 1; x++)
 				{
 					Vector3 position = new Vector3(x + 0.5f - lenX / 2f, 0, lenY - y - 0.5f - lenY / 2f);
 					Vector3 angle = new Vector3(0, Random.Range(0f, 360f), 0);
+					
+					if(x < 0 || y < 0 || y >= lenY || x >= lenX)
+					{
+						Transform block = Instantiate(blocks[Random.Range(0, blocks.Length)], parent).transform;
+						block.position = position;
+						if(block.TryGetComponent(out Entity entity))
+							entity.Model.eulerAngles = angle;
+						continue;
+					}
+					
 					switch(grid[x, y])
 					{
 						case EntityType.__:
@@ -156,10 +178,12 @@ namespace Managers {
 							key.Model.eulerAngles = angle;
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
 							dimensionController.SetEmpty(x, y, dimension);
+							_keyCount++;
 							break;
 						case EntityType.Door:
 							Door door = Instantiate(this.door, parent);
 							door.transform.position = position;
+							_doors.Add(door);
 							break;
 						default:
 							throw new ArgumentOutOfRangeException();

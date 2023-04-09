@@ -4,8 +4,6 @@ namespace Controllers
 {
 	public class Door : MonoBehaviour
 	{
-		[SerializeField]
-		private int requiredKey = 3;
-
+		public int RequiredKey = 0;
 	}
 }

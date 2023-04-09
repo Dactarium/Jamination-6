@@ -21,18 +21,19 @@ namespace Controllers
 		private void Update()
 		{
 			transform.position = GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, Dimension);
+			//TODO: Optimizde edilecek
+			Model.gameObject.SetActive(Dimension switch {
+				Dimension.Red => GameManager.Instance.Player.RedApple > 0,
+				Dimension.Green => GameManager.Instance.Player.GreenApple > 0,
+				Dimension.Blue => GameManager.Instance.Player.BlueApple > 0
+		});
 		}
 
 		public override void OnDimensionChange(Dimension previous, Dimension next)
 		{
-			// transform.position = GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, Dimension);
-			// waypointRoot = GameManager.Instance.DimensionController.GetWaypointRoot(next);
-			// ChangeRoute();
-			
 			if(previous == Dimension)
 				gameObject.SetActive(true);
 			
-				
 			
 			if(next == Dimension)
 				gameObject.SetActive(false);

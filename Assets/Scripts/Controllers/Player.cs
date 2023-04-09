@@ -4,6 +4,7 @@ using Enums;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Controllers
 {
@@ -41,9 +42,9 @@ namespace Controllers
 
 		private Direction direction = Direction.Down;
 		private Dimension appleDimension = Dimension.Red;
-		private int RedApple = 0;
-		private int GreenApple = 0;
-		private int BlueApple = 0;
+		public  int RedApple   { get; private set; } = 0;
+		public  int GreenApple { get; private set; } = 0;
+		public  int BlueApple  { get; private set; } = 0;
 		private int TotalApple => RedApple + BlueApple + GreenApple;
 		private float angle;
 
@@ -134,11 +135,11 @@ namespace Controllers
 			if (Input.GetKeyDown(KeyCode.F) && tree)
 			{
 				if (tree.Dimension == Dimension.Red) {
-					CollectingApple(ref RedApple, ref RedAppleCounter);
+					RedApple = CollectingApple(RedApple, ref RedAppleCounter);
 				}else if (tree.Dimension == Dimension.Green) {
-					CollectingApple(ref GreenApple, ref GreenAppleCounter);
+					GreenApple = CollectingApple(GreenApple, ref GreenAppleCounter);
 				}else if (tree.Dimension == Dimension.Blue) {
-					CollectingApple(ref BlueApple, ref BlueAppleCounter);
+					BlueApple = CollectingApple(BlueApple, ref BlueAppleCounter);
 				}
 			}
 
@@ -247,16 +248,17 @@ namespace Controllers
 			GameManager.Instance.DimensionController.SetSpawnIndex(gridIndex);
 		}
 		
-		private void CollectingApple(ref int count, ref TextMeshProUGUI counter)
+		private int CollectingApple(int count, ref TextMeshProUGUI counter)
 		{
 			if(count > 2)
-				return;
+				return count;
 			if (TotalApple > 4)
-				return;
+				return count;
 		
 			count++;
 			BagCounter.text = TotalApple.ToString() + " / 5";
 			counter.text = count.ToString();
+			return count;
 		}
 
 		private void SpendCurrentApple()
@@ -325,14 +327,14 @@ namespace Controllers
 				Destroy(other.gameObject);
 				Instantiate(carrotImage, carrotSlots);
 			}
-			if (other.tag.Equals("Door"))
+			if (other.tag.Equals("Door") && other.TryGetComponent(out Door door))
 			{
-				print("yees");
-				if(carrotAmount > 2)
+				if(carrotAmount >= door.RequiredKey)
 				{
 					carrotAmount = 0;
 					carrotSlots.gameObject.SetActive(false);
 					other.gameObject.SetActive(false);
+					ReloadScene();
 				}
 			}
 		}
@@ -343,6 +345,12 @@ namespace Controllers
 				tree = null;
 				UIText.gameObject.SetActive(false);
 			}
+		}
+
+		private async void ReloadScene()
+		{
+			await Task.Delay(500);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 }
