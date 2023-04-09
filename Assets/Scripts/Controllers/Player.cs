@@ -156,6 +156,8 @@ namespace Controllers
 				}else if (tree.Dimension == Dimension.Blue) {
 					BlueApple = CollectingApple(BlueApple, ref BlueAppleCounter);
 				}
+				
+				BagCounter.text = TotalApple + " / 5";
 			}
 
 			#endregion
@@ -269,10 +271,10 @@ namespace Controllers
 				return count;
 			if (TotalApple > 4)
 				return count;
+			
 			audio.clip = applePick;
 			audio.Play();
 			count++;
-			BagCounter.text = TotalApple.ToString() + " / 5";
 			counter.text = count.ToString();
 			return count;
 		}
