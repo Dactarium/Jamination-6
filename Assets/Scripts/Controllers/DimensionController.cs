@@ -13,7 +13,9 @@ namespace Controllers
 		
 		public Dimension Dimension { get; private set; }
 
-		public WaypointRoot WaypointRoot => Dimension switch {
+		public WaypointRoot WaypointRoot => GetWaypointRoot(Dimension);
+		
+		public WaypointRoot GetWaypointRoot(Dimension dimension) => dimension switch {
 			Dimension.Red => redWaypointRoot,
 			Dimension.Blue => blueWaypointRoot,
 			Dimension.Green => greenWaypointRoot,
@@ -105,11 +107,11 @@ namespace Controllers
 					switch(dimension)
 					{
 						case Dimension.Red:
-							return new Vector3(RedSpawn.x - GameManager.GridSize.x / 2f, 0, RedSpawn.y - GameManager.GridSize.y / 2f);
+							return new Vector3(RedSpawn.x + 0.5f - GameManager.GridSize.x / 2f, 0, RedSpawn.y + 0.5f - GameManager.GridSize.y / 2f);
 						case Dimension.Green:
-							return new Vector3(GreenSpawn.x - GameManager.GridSize.x / 2f, 0, GreenSpawn.y - GameManager.GridSize.y / 2f);
+							return new Vector3(GreenSpawn.x + 0.5f- GameManager.GridSize.x / 2f, 0, GreenSpawn.y + 0.5f - GameManager.GridSize.y / 2f);
 						case Dimension.Blue:
-							return new Vector3(BlueSpawn.x - GameManager.GridSize.x / 2f, 0, BlueSpawn.y - GameManager.GridSize.y / 2f);
+							return new Vector3(BlueSpawn.x + 0.5f - GameManager.GridSize.x / 2f, 0, BlueSpawn.y + 0.5f - GameManager.GridSize.y / 2f);
 						default:
 							throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
 					}

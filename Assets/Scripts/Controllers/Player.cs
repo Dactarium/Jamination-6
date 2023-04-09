@@ -171,6 +171,7 @@ namespace Controllers
 				SpendCurrentApple();
 				GameManager.Instance.ChangeDimension(appleDimension);
 				transform.position = GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, appleDimension);
+				animator.SetFloat("Dimension", (int)appleDimension / 3f);
 				UIText.gameObject.SetActive(false);
 			}
 
@@ -224,16 +225,13 @@ namespace Controllers
 
 		private void CheckGridIndex()
 		{
-			Vector2Int gridIndex = new Vector2Int(Mathf.RoundToInt(transform.position.x + GameManager.GridSize.x / 2f), Mathf.RoundToInt(transform.position.z + GameManager.GridSize.y / 2f));
+			Vector2Int gridIndex = new Vector2Int(Mathf.RoundToInt(transform.position.x - 0.5f + GameManager.GridSize.x / 2f), Mathf.RoundToInt(transform.position.z - 0.5f + GameManager.GridSize.y / 2f));
 			gridIndex.x = Mathf.Clamp(gridIndex.x, 0, GameManager.GridSize.x - 1);
 			gridIndex.y = Mathf.Clamp(gridIndex.y, 0, GameManager.GridSize.y - 1);
 			if(_lastGridIndex == gridIndex)
 				return;
 
 			_lastGridIndex = gridIndex;
-
-			print(transform.position);
-			print(GameManager.Instance.DimensionController.GetSpawnPoint(EntityType.Player, appleDimension));
 			GameManager.Instance.DimensionController.SetSpawnIndex(gridIndex);
 		}
 		

@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Controllers;
 using Enums;
 using Helpers;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Managers
 {
@@ -15,14 +18,29 @@ namespace Managers
 		public DimensionController DimensionController { get; private set; }
 		
 		public static Vector2Int GridSize { get; private set; }
+
+		[SerializeField]
+		private List<Ghost> ghosts;
+
+		[SerializeField]
+		private Camera _camera;
 		
 		private void Start()
 		{
 			LevelGenerator.Instance.GenerateLevel(0);
-			DimensionController.OnDimensionChange += (previous, current) => { CurrentDimension = current; };
+			DimensionController.OnDimensionChange += (previous, next) => { CurrentDimension = next; };
 			
 			CurrentDimension = DimensionController.Dimension;
+
+			foreach (var ghost in ghosts)
+			{
+				DimensionController.OnDimensionChange += ghost.OnDimensionChange;
+				ghost.gameObject.SetActive(CurrentDimension != ghost.Dimension);
+				ghost.transform.position = DimensionController.GetSpawnPoint(EntityType.Player, ghost.Dimension);
+				ghost.SetWaypointRoot(DimensionController.GetWaypointRoot(ghost.Dimension));
+			}
 		}
+		
 		public void ChangeDimension(Dimension dimension) => DimensionController.ChangeDimension(dimension);
 
 		public void SetGridSize(int x, int y)

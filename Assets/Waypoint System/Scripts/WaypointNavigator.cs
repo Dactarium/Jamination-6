@@ -29,44 +29,46 @@ namespace Waypoint_System.Scripts
 
 			NavigatorNode destinationNode = null;
 			int loopCount = 0;
-			do{
-				NavigatorNode lowestF = calculatedNodes[0];
-				calculatedNodes.Remove(lowestF);
-				closedNodes.Add(lowestF);
+			if(calculatedNodes.Count > 0)
+				do{
+					NavigatorNode lowestF = calculatedNodes[0];
+					calculatedNodes.Remove(lowestF);
+					closedNodes.Add(lowestF);
 
-				foreach(Waypoint connection in lowestF.waypoint.Connections){
-					if(connection == destination){
-						destinationNode = new NavigatorNode(destination, lowestF, destinationPos);
-						break;
+					foreach(Waypoint connection in lowestF.waypoint.Connections){
+						if(connection == destination){
+							destinationNode = new NavigatorNode(destination, lowestF, destinationPos);
+							break;
+						}
+						if(GetNode(connection, closedNodes) != null) continue;
+
+						NavigatorNode connectionNode = GetNode(connection, calculatedNodes);
+
+						if(connectionNode == null){
+
+							connectionNode = new NavigatorNode(connection, lowestF, destinationPos);
+							calculatedNodes.Add(connectionNode);
+
+						}else{
+		                    
+							connectionNode.checkG(lowestF);
+
+						}
+
+						calculatedNodes = calculatedNodes.OrderBy(o => o.F).ToList();
 					}
-					if(GetNode(connection, closedNodes) != null) continue;
 
-					NavigatorNode connectionNode = GetNode(connection, calculatedNodes);
-
-					if(connectionNode == null){
-
-						connectionNode = new NavigatorNode(connection, lowestF, destinationPos);
-						calculatedNodes.Add(connectionNode);
-
-					}else{
-                        
-						connectionNode.checkG(lowestF);
-
-					}
-
-					calculatedNodes = calculatedNodes.OrderBy(o => o.F).ToList();
-				}
-
-			}while(destinationNode == null && loopCount++ < pahtfindingSearchLimit);
+				}while(calculatedNodes.Count > 0 && destinationNode == null && loopCount++ < pahtfindingSearchLimit);
 
 			NavigatorNode currentNode = destinationNode;
-			if(currentNode == null) currentNode = calculatedNodes[0];
+			if(currentNode == null && calculatedNodes.Count > 0) currentNode = calculatedNodes[0];
 
 			loopCount = 0;
-			do{
-				route.Push(currentNode.waypoint);
-				currentNode = currentNode.parent;
-			}while(currentNode != null && loopCount++ < pahtfindingSearchLimit);
+			if(currentNode != null)
+				do{
+					route.Push(currentNode.waypoint);
+					currentNode = currentNode.parent;
+				}while(currentNode != null && loopCount++ < pahtfindingSearchLimit);
             
 			return route;
 		}

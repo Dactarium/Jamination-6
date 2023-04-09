@@ -105,7 +105,7 @@ namespace Managers {
 			for(int y = 0; y < lenY; y++)
 				for(int x = 0; x < lenX; x++)
 				{
-					Vector3 position = new Vector3(x - lenX / 2f, 0, (lenY - y - 1) - lenY / 2f);
+					Vector3 position = new Vector3(x + 0.5f - lenX / 2f, 0, lenY - y - 0.5f - lenY / 2f);
 					Vector3 angle = new Vector3(0, Random.Range(0f, 360f), 0);
 					switch(grid[x, y])
 					{
@@ -143,19 +143,16 @@ namespace Managers {
 							Tree redTree = Instantiate(this.redTree, parent);
 							redTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
-							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.GreenTree:
 							Tree greenTree = Instantiate(this.greenTree, parent);
 							greenTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
-							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.BlueTree:
 							Tree blueTree = Instantiate(this.blueTree, parent);
 							blueTree.transform.position = position; 
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
-							dimensionController.SetEmpty(x, y, dimension);
 							break;
 						case EntityType.Key:
 							Key key = Instantiate(this.key, parent);
@@ -179,7 +176,7 @@ namespace Managers {
 		private void CreateWaypoint(int x, int y, ref Waypoint[,] waypoints, ref WaypointRoot waypointRoot, Vector3 position)
 		{
 			Waypoint waypoint = new GameObject("Waypoint").AddComponent<Waypoint>();
-			waypoint.Radius = 0.2f;
+			waypoint.Radius = 0f;
 			waypoints[x, y] = waypoint;
 			waypoint.transform.SetParent(waypointRoot.transform);
 			waypoint.transform.position = position;

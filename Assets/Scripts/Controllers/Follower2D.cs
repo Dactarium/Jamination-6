@@ -16,7 +16,8 @@ namespace Controllers
 
 		protected Stack<Waypoint> _route;
 
-		protected Vector3 _targetPosition;
+		protected virtual Vector3 TargetPosition => target.position;
+		protected Vector3 _movePosition;
 
 		protected Vector3 direction;
 		protected override void Start()
@@ -32,7 +33,7 @@ namespace Controllers
 		}
 
 		protected virtual bool IsTargetChanged(){
-			Waypoint newTargetWaypoint = waypointRoot.GetNearestWaypoint(target.position);
+			Waypoint newTargetWaypoint = waypointRoot.GetNearestWaypoint(TargetPosition);
 
 			if(_targetWaypoint == newTargetWaypoint)return false;
 
@@ -43,30 +44,32 @@ namespace Controllers
 		protected void ChangeRoute(){
 			Waypoint nearestWaypoint = waypointRoot.GetNearestWaypoint(transform.position);
 			_route = WaypointNavigator.Navigate(nearestWaypoint, _targetWaypoint);
-			_route.Pop();
 			if(_route is { Count: > 0 })
-				_targetPosition = _route.Pop().RandomPosition;
+				_route.Pop();
+			if(_route is { Count: > 0 })
+				_movePosition = _route.Pop().transform.position;
 			else
-				_targetPosition = target.position;
+				_movePosition = TargetPosition;
 		}
 
 		protected void Move(){
-			if((_targetPosition - transform.position).magnitude < _reachDistance){
+			if((_movePosition - transform.position).magnitude < _reachDistance){
 				OnReached();
+				return;
 			} 
 
-			direction = (_targetPosition - transform.position).normalized;
+			direction = (_movePosition - transform.position).normalized;
 
 			transform.position += direction * Time.deltaTime * speed;
 
-			Debug.DrawLine(transform.position, _targetPosition, Color.magenta);
+			Debug.DrawLine(transform.position, _movePosition, Color.magenta);
 		}
 
     
 		protected virtual void OnReached()
 		{
-			if(_route is { Count: > 0 }) _targetPosition = _route.Pop().RandomPosition;
-			else _targetPosition = target.position;
+			if(_route is { Count: > 0 }) _movePosition = _route.Pop().transform.position;
+			else _movePosition = TargetPosition;
 			
 			if(IsTargetChanged()) ChangeRoute();
 		}
