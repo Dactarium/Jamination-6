@@ -67,6 +67,15 @@ namespace Controllers
 		[SerializeField]
 		private Animator animator;
 
+		[SerializeField]
+		private AudioSource audio;
+
+		[SerializeField]
+		private AudioClip applePick;
+
+		[SerializeField]
+		private AudioClip carrotPick;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -254,7 +263,8 @@ namespace Controllers
 				return count;
 			if (TotalApple > 4)
 				return count;
-		
+			audio.clip = applePick;
+			audio.Play();
 			count++;
 			BagCounter.text = TotalApple.ToString() + " / 5";
 			counter.text = count.ToString();
@@ -323,6 +333,8 @@ namespace Controllers
 			}
 			if (other.tag.Equals("Key"))
 			{
+				audio.clip = carrotPick;
+				audio.Play();
 				carrotAmount++;
 				Destroy(other.gameObject);
 				Instantiate(carrotImage, carrotSlots);

@@ -53,6 +53,8 @@ MonoBehaviour:
   Sprite: {fileID: 5472697888099990205}
   Puf: {fileID: 5670546542167545908, guid: c931a3e40aa597f43b0dd05d4dd74016, type: 3}
   moveSpeed: 12.5
+  audio: {fileID: 0}
+  puff: {fileID: 8300000, guid: 5c4863e1f00c71641b145d7829ad2894, type: 3}
   rotateSpeed: 360
 --- !u!135 &6621084646878421823
 SphereCollider:
