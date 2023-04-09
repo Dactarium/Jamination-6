@@ -90,7 +90,7 @@ namespace Controllers
 				Instantiate(Puf, other.transform.position + Vector3.up, other.transform.rotation);
 				audio.clip = puff;
 				audio.Play();
-				other.GetComponent<Wolf>().appleTouch(appledimension);
+				other.GetComponent<Wolf>().ChangeDimension(appledimension);
 				Destroy(this.gameObject);
 			}
 		}

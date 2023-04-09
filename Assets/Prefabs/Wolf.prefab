@@ -66,8 +66,10 @@ MonoBehaviour:
   waypointRoot: {fileID: 0}
   target: {fileID: 0}
   speed: 1
-  _reachDistance: 1
+  _reachDistance: 0.1
   animator: {fileID: 7417258617906580989}
+  Puf: {fileID: 0}
+  PufSpawn: {fileID: 0}
 --- !u!95 &7417258617906580989
 Animator:
   serializedVersion: 5
@@ -114,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3848861059360124171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.154, z: 0}
+  m_LocalPosition: {x: 0.15, y: 1.154, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -162,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e84058077a50644a94d1602967397d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 015c035800358564a8afefb6af64ac18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
