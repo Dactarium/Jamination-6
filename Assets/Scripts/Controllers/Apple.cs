@@ -21,7 +21,13 @@ namespace Controllers
 
 		[SerializeField]
 		private float moveSpeed = 5f;
-    
+
+		[SerializeField]
+		private AudioSource audio;
+
+		[SerializeField]
+		private AudioClip puff;
+
 		[SerializeField]
 		private float rotateSpeed = 60f;
 
@@ -82,6 +88,8 @@ namespace Controllers
 			if (other.tag == "Wolf")
 			{
 				Instantiate(Puf, other.transform.position + Vector3.up, other.transform.rotation);
+				audio.clip = puff;
+				audio.Play();
 				other.GetComponent<Wolf>().appleTouch(appledimension);
 				Destroy(this.gameObject);
 			}
