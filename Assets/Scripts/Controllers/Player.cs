@@ -17,8 +17,10 @@ namespace Controllers
 		public TextMeshProUGUI GreenAppleCounter;
 		public TextMeshProUGUI BlueAppleCounter;
 		public TextMeshProUGUI BagCounter;
+		[field: SerializeField]
+		private TextMeshProUGUI MenuText;
 
-	
+
 		private float moveSpeed = 5f;
 		[SerializeField]
 		private float runSpeed = 7.5f;
@@ -33,6 +35,9 @@ namespace Controllers
 		private float maxStamina = 40f;
 		[SerializeField]
 		private float runStartStamina = 0;
+
+		[SerializeField]
+		private GameObject escMenu;
 
 		private Direction direction = Direction.Down;
 		private Dimension appleDimension = Dimension.Red;
@@ -176,6 +181,13 @@ namespace Controllers
 			}
 
 			#endregion
+
+			if (Input.GetKeyDown(KeyCode.Escape))
+            {
+				escMenu.SetActive(true);
+				Time.timeScale = 0;
+				MenuText.gameObject.SetActive(true);
+			}
 		}
 		
 		private void HandleMovement()
@@ -315,6 +327,7 @@ namespace Controllers
 			}
 			if (other.tag.Equals("Door"))
 			{
+				print("yees");
 				if(carrotAmount > 2)
 				{
 					carrotAmount = 0;

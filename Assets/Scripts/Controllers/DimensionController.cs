@@ -26,6 +26,11 @@ namespace Controllers
 		private WaypointRoot greenWaypointRoot;
 		private WaypointRoot blueWaypointRoot;
 
+		private Transform red;
+		private Transform green;
+		private Transform blue;
+
+
 		private bool[,] redEmptys;
 		private bool[,] greenEmptys;
 		private bool[,] blueEmptys;
@@ -41,6 +46,24 @@ namespace Controllers
 			redEmptys = new bool[x, y];
 			greenEmptys = new bool[x, y];
 			blueEmptys = new bool[x, y];
+		}
+
+		public void SetDimensionTransform(Dimension dimension, Transform transform) 
+		{
+			switch (dimension)
+			{
+				case Dimension.Red:
+					red = transform;
+					break;
+				case Dimension.Green:
+					green = transform;
+					break;
+				case Dimension.Blue:
+					blue = transform;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+			}
 		}
 
 		public void ChangeDimension(Dimension dimension)
@@ -122,6 +145,21 @@ namespace Controllers
 			}
 
 			return Vector3.zero;
+		}
+
+		public Transform GetDimensionTransform(Dimension dimension)
+        {
+			switch (dimension)
+			{
+				case Dimension.Red:
+					return red;
+				case Dimension.Green:
+					return green;
+				case Dimension.Blue:
+					return blue;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(dimension), dimension, null);
+			}
 		}
 	}
 }

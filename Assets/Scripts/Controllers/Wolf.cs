@@ -2,6 +2,7 @@ using System;
 using Enums;
 using Managers;
 using UnityEngine;
+using Enums;
 
 namespace Controllers
 {
@@ -11,6 +12,10 @@ namespace Controllers
 		private Animator animator;
 
 		private Direction moveDirection = Direction.Down;
+		[SerializeField]
+		private GameObject Puf;
+		[SerializeField]
+		private GameObject PufSpawn;
 		protected override void Start()
 		{
 			target = GameManager.Instance.Player.transform;
@@ -51,4 +56,15 @@ namespace Controllers
 			}
 		}
 	}
+
+		public void appleTouch(Dimension dimension)
+        {
+			print(dimension);
+			Transform parent = GameManager.Instance.DimensionController.GetDimensionTransform(dimension);
+			transform.SetParent(parent);
+			
+		}
+
+
+    }
 }
