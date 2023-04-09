@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using Waypoint_System.Scripts;
 
 [InitializeOnLoad()]
 public class WaypointEditor 

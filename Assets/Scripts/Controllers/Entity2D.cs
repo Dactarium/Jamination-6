@@ -6,7 +6,7 @@ namespace Controllers
 	public class Entity2D : Entity
 	{
 
-		private void Start()
+		protected virtual void Start()
 		{
 			GameManager.Instance.Player.OnRotate += OnRotate;
 		}

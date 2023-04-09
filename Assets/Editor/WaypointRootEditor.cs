@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Waypoint_System.Scripts;
 
 [CustomEditor(typeof(WaypointRoot))]
 public class WaypointRootEditor : Editor

@@ -88,8 +88,8 @@ MonoBehaviour:
   BagCounter: {fileID: 0}
   runSpeed: 5
   walkSpeed: 2
-  staminaCost: 10
-  staminaRegen: 15
+  staminaCost: 30
+  staminaRegen: 60
   maxStamina: 15
   runStartStamina: 5
   carrotSlots: {fileID: 0}

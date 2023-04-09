@@ -12,15 +12,15 @@ namespace Managers
 		
 		public Dimension CurrentDimension { get; private set; }
 
-		private DimensionController _dimensionController;
+		public DimensionController DimensionController { get; private set; }
 		
 		private void Start()
 		{
-			_dimensionController = LevelGenerator.Instance.GenerateLevel(0);
-			_dimensionController.OnDimensionChange += (previous, current) => { CurrentDimension = current; };
+			DimensionController = LevelGenerator.Instance.GenerateLevel(0);
+			DimensionController.OnDimensionChange += (previous, current) => { CurrentDimension = current; };
 			
-			CurrentDimension = _dimensionController.Dimension;
+			CurrentDimension = DimensionController.Dimension;
 		}
-		public void ChangeDimension(Dimension dimension) => _dimensionController.ChangeDimension(dimension);
+		public void ChangeDimension(Dimension dimension) => DimensionController.ChangeDimension(dimension);
 	}
 }

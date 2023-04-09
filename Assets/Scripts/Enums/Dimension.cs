@@ -3,7 +3,7 @@
 	public enum Dimension
 	{
 		Red,
-		Blue,
 		Green,
+		Blue,
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Waypoint_System.Scripts;
 
 public class WaypointManagerWindow : EditorWindow
 {

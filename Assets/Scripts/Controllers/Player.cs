@@ -34,7 +34,7 @@ namespace Controllers
 		[SerializeField]
 		private float runStartStamina = 0;
 
-		private Direction direction = Direction.Up;
+		private Direction direction = Direction.Down;
 		private Dimension appleDimension = Dimension.Red;
 		private int RedApple = 0;
 		private int GreenApple = 0;
