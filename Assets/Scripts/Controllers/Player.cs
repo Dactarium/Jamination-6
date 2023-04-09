@@ -380,10 +380,9 @@ namespace Controllers
 			}
 		}
 
-		private async void NextLevel()
+		private void NextLevel()
 		{
 			PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 0) + 1);
-			await Task.Delay(500);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}

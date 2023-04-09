@@ -79,14 +79,8 @@ namespace Controllers
 		{
 			if(other.tag.Equals("Player"))
 			{
-				ReloadScene();
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			}
-		}
-
-		private async void ReloadScene()
-		{
-			await Task.Delay(500);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 }
