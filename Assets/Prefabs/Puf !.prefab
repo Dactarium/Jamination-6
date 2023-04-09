@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5670546542167545910}
   - component: {fileID: 5670546542167545909}
   - component: {fileID: 5670546542167545911}
+  - component: {fileID: 1279908629787332901}
   m_Layer: 0
   m_Name: Puf !
   m_TagString: Untagged
@@ -106,3 +107,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &1279908629787332901
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670546542167545908}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3e93e65bdde46804db3a3a4d73487e24, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

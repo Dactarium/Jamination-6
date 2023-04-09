@@ -14,6 +14,11 @@ namespace Controllers
 		[SerializeField]
 		private SpriteRenderer Sprite;
 
+		private Dimension appledimension;
+
+		[SerializeField]
+		private GameObject Puf;
+
 		[SerializeField]
 		private float moveSpeed = 5f;
     
@@ -25,6 +30,7 @@ namespace Controllers
 
 		public void Setup(Dimension dimension, Direction direction, Transform sender)
 		{
+			appledimension = dimension;
 			switch (dimension)
 			{
 				case Dimension.Red:
@@ -69,6 +75,16 @@ namespace Controllers
 			Vector3 angles = transform.eulerAngles;
 			angles.z = (angles.z + rotateSpeed * rotateDir * Time.deltaTime) % 360f;
 			transform.eulerAngles = angles;
+		}
+
+		public void OnTriggerEnter(Collider other)
+		{
+			if (other.tag == "Wolf")
+			{
+				Instantiate(Puf, other.transform.position + Vector3.up, other.transform.rotation);
+				other.GetComponent<Wolf>().appleTouch(appledimension);
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }
