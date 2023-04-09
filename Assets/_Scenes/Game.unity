@@ -423,6 +423,10 @@ MonoBehaviour:
     Red: {fileID: 4900000, guid: af0084e8aa72f794aad33100c6155022, type: 3}
     Green: {fileID: 4900000, guid: a4e4ce42dbccc0f41b716987a6d47e3d, type: 3}
     Blue: {fileID: 4900000, guid: 979a7816195ad9f49b0a1b8096825081, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: 4dfd6b21d642c184ba72b08b746017a9, type: 3}
+    Green: {fileID: 4900000, guid: 3e9a145c0c66cad489981301aa8349b0, type: 3}
+    Blue: {fileID: 4900000, guid: fc120a6ed81fb4c45b3d1cccfc836ece, type: 3}
   player: {fileID: 40375522}
   wolf: {fileID: 2265774245338505563, guid: 9998f1eadaed25e48a6290d068c37b07, type: 3}
   lumberjack: {fileID: 8966544544145039649, guid: dc7fa022ffe2bbb40bb363948bb53175,
