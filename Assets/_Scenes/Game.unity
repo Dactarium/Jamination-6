@@ -408,7 +408,7 @@ MonoBehaviour:
     Green: {fileID: 4900000, guid: 0fae2831f825f90428bdc8f54f5b6263, type: 3}
     Blue: {fileID: 4900000, guid: 5459532ccad4e3b4d9f697f84300a106, type: 3}
   player: {fileID: 40375522}
-  wolf: {fileID: 1798836391915525317, guid: 9998f1eadaed25e48a6290d068c37b07, type: 3}
+  wolf: {fileID: 2265774245338505563, guid: 9998f1eadaed25e48a6290d068c37b07, type: 3}
   lumberjack: {fileID: 8966544544145039649, guid: dc7fa022ffe2bbb40bb363948bb53175,
     type: 3}
   redTree: {fileID: 2341172519951798530, guid: cee3083ea9340c441aaf7b9545c194f3, type: 3}
@@ -989,6 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 40375522}
+  MenuText: {fileID: 0}
   ghosts:
   - {fileID: 1360003654}
   - {fileID: 116123635}

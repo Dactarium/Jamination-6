@@ -20,7 +20,7 @@ namespace Managers {
 		private Player player;
 
 		[SerializeField]
-		private GameObject wolf;
+		private Wolf wolf;
 	
 		[SerializeField]
 		private GameObject lumberjack;
@@ -129,8 +129,9 @@ namespace Managers {
 							
 							break;
 						case EntityType.Wolf:
-							GameObject wolf = Instantiate(this.wolf, parent);
+							Wolf wolf = Instantiate(this.wolf, parent);
 							wolf.transform.position = position;
+							wolf.ChangeDimension(dimension);
 							CreateWaypoint(x, y, ref waypoints, ref waypointRoot, position);
 							dimensionController.SetEmpty(x, y, dimension);
 							break;

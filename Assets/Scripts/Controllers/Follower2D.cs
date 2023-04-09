@@ -44,12 +44,10 @@ namespace Controllers
 		protected void ChangeRoute(){
 			Waypoint nearestWaypoint = waypointRoot.GetNearestWaypoint(transform.position);
 			_route = WaypointNavigator.Navigate(nearestWaypoint, _targetWaypoint);
-			if(_route is { Count: > 0 })
+			if(_route is { Count: > 1 })
 				_route.Pop();
 			if(_route is { Count: > 0 })
 				_movePosition = _route.Pop().transform.position;
-			else
-				_movePosition = TargetPosition;
 		}
 
 		protected void Move(){
@@ -69,8 +67,7 @@ namespace Controllers
 		protected virtual void OnReached()
 		{
 			if(_route is { Count: > 0 }) _movePosition = _route.Pop().transform.position;
-			else _movePosition = TargetPosition;
-			
+
 			if(IsTargetChanged()) ChangeRoute();
 		}
     

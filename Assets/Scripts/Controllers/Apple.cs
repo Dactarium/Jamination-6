@@ -82,7 +82,7 @@ namespace Controllers
 			if (other.tag == "Wolf")
 			{
 				Instantiate(Puf, other.transform.position + Vector3.up, other.transform.rotation);
-				other.GetComponent<Wolf>().appleTouch(appledimension);
+				other.GetComponent<Wolf>().ChangeDimension(appledimension);
 				Destroy(this.gameObject);
 			}
 		}

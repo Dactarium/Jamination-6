@@ -3,6 +3,7 @@ using Enums;
 using Managers;
 using UnityEngine;
 using Enums;
+using Waypoint_System.Scripts;
 
 namespace Controllers
 {
@@ -16,10 +17,18 @@ namespace Controllers
 		private GameObject Puf;
 		[SerializeField]
 		private GameObject PufSpawn;
+
+		private Dimension _dimension = Dimension.Red;
+
+		private void OnEnable()
+		{
+			ChangeDimension(_dimension);
+			ChangeRoute();
+		}
+
 		protected override void Start()
 		{
 			target = GameManager.Instance.Player.transform;
-			waypointRoot = GameManager.Instance.DimensionController.WaypointRoot;
 			base.Start();
 		}
 
@@ -27,7 +36,9 @@ namespace Controllers
 		{
 			base.Update();
 			Vector3 rotatedDirection = Quaternion.Euler(-Model.eulerAngles) * direction;
-
+			
+			animator.SetBool("Walk", (_movePosition - transform.position).magnitude > 0.1f);
+			
 			if(Mathf.Abs(rotatedDirection.z) > Mathf.Abs(rotatedDirection.x))
 			{
 				if(rotatedDirection.z > 0 && moveDirection is not Direction.Up)
@@ -56,12 +67,13 @@ namespace Controllers
 			}
 		}
 		
-		public void appleTouch(Dimension dimension)
+		public void ChangeDimension(Dimension dimension)
 		{
-			print(dimension);
 			Transform parent = GameManager.Instance.DimensionController.GetDimensionTransform(dimension);
 			transform.SetParent(parent);
-			
+			waypointRoot = GameManager.Instance.DimensionController.GetWaypointRoot(dimension);
+			animator.SetFloat("Dimension", (int)dimension / 3f);
+			_dimension = dimension;
 		}
 	}
 }
