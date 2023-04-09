@@ -1,9 +1,9 @@
-﻿using UnityEditor;
-using UnityEngine;
-
-public enum Dimension
+﻿namespace Enums
 {
-    Red,
-    Blue,
-    Green,
+	public enum Dimension
+	{
+		Red,
+		Green,
+		Blue,
+	}
 }

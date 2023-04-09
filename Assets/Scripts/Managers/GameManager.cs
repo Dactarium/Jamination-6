@@ -1,22 +1,26 @@
-using System;
-using DefaultNamespace.Controllers;
+using Controllers;
+using Enums;
 using Helpers;
 using UnityEngine;
 
-namespace DefaultNamespace.Managers
+namespace Managers
 {
 	public class GameManager : Singleton<GameManager>
 	{
+		[field:SerializeField]
+		public Player Player { get; private set; }
+		
 		public Dimension CurrentDimension { get; private set; }
 
-		private DimensionController _dimensionController;
+		public DimensionController DimensionController { get; private set; }
+		
 		private void Start()
 		{
-			_dimensionController = LevelGenerator.Instance.GenerateLevel(0);
-			_dimensionController.OnDimensionChange += (previous, current) => { CurrentDimension = current; };
+			DimensionController = LevelGenerator.Instance.GenerateLevel(0);
+			DimensionController.OnDimensionChange += (previous, current) => { CurrentDimension = current; };
 			
-			CurrentDimension = _dimensionController.Dimension;
+			CurrentDimension = DimensionController.Dimension;
 		}
-		public void ChangeDimension(Dimension dimension) => _dimensionController.ChangeDimension(dimension);
+		public void ChangeDimension(Dimension dimension) => DimensionController.ChangeDimension(dimension);
 	}
 }

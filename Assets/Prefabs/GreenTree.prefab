@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 39f9f5c71e4943949991afd548e17bd8, type: 2}
+    - target: {fileID: 5084086109452932260, guid: 8d40817bb53065840ab113a9df2a0c4a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bf0cbdcddd2a9634bb36fe75c1f35312,
+        type: 3}
     - target: {fileID: 6424015381606002084, guid: 8d40817bb53065840ab113a9df2a0c4a,
         type: 3}
       propertyPath: m_Name
@@ -75,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 6424015381606002090, guid: 8d40817bb53065840ab113a9df2a0c4a,
         type: 3}
       propertyPath: <Dimension>k__BackingField
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d40817bb53065840ab113a9df2a0c4a, type: 3}

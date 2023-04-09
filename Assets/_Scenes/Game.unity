@@ -335,11 +335,10 @@ MonoBehaviour:
   - {fileID: 1848558982173278918, guid: 440fabea47039de4d87745987017c46d, type: 3}
   - {fileID: 1848558982173278918, guid: 611c940932bcb2848b851b04b5f1984a, type: 3}
   - {fileID: 1848558982173278918, guid: f4408d6edce0bea4aa478159eea34b21, type: 3}
+  - {fileID: 1848558982173278918, guid: cab18566e02793c448440b2ccd35a2cc, type: 3}
+  - {fileID: 1848558982173278918, guid: a359399043078994aad2aa9d0c970594, type: 3}
   - {fileID: 1848558982173278918, guid: bdb61510b1d721a489a101412a305bf2, type: 3}
-  redKey: {fileID: 7307291863872879401, guid: 30466558ed5e4f6489b68c9c1df19590, type: 3}
-  greenKey: {fileID: 7063758315085758828, guid: 06bb0433cd22f47439b210195669a5c6,
-    type: 3}
-  blueKey: {fileID: 2937502214973204964, guid: f297ea4c78313794fa6e3f17db16e50d, type: 3}
+  key: {fileID: 7199859163248334747, guid: dd09879659f335c48a2df84c931ef2f9, type: 3}
   door: {fileID: 8474905264533712804, guid: efa4e1f5b40b5454faf4b7011145cf4d, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -581,15 +580,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5240286792317460879, guid: 288a9c577cdc2334a9c0a852d2489307,
+    - target: {fileID: 926358190333813218, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240286792317460879, guid: 288a9c577cdc2334a9c0a852d2489307,
-        type: 3}
-      propertyPath: m_FlipY
-      value: 0
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
@@ -810,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd9a18f3b1241ee9125257e723be26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Player>k__BackingField: {fileID: 40375522}
 --- !u!1 &2062162997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1033,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491199805070003159, guid: 9d7fa25142cf3e8469bacb561052fe19,
+        type: 3}
+      propertyPath: m_Name
+      value: Bag
       objectReference: {fileID: 0}
     - target: {fileID: 7491199805656538980, guid: 9d7fa25142cf3e8469bacb561052fe19,
         type: 3}

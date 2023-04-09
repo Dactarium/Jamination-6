@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5382336810237887330}
   - component: {fileID: 5382336810237887331}
   - component: {fileID: 5382336810237887328}
+  - component: {fileID: 4350457867047023674}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -85,12 +86,12 @@ MonoBehaviour:
   GreenAppleCounter: {fileID: 0}
   BlueAppleCounter: {fileID: 0}
   BagCounter: {fileID: 0}
-  runSpeed: 7.5
-  walkSpeed: 5
-  staminaCost: 0.5
-  staminaRegen: 3
-  maxStamina: 40
-  runStartStamina: 7.5
+  runSpeed: 5
+  walkSpeed: 2
+  staminaCost: 30
+  staminaRegen: 60
+  maxStamina: 15
+  runStartStamina: 5
   carrotSlots: {fileID: 0}
   carrotImage: {fileID: 8329359989547684001, guid: 92d6a7b0202fa454dbcd2251247f85ee,
     type: 3}
@@ -120,6 +121,28 @@ MonoBehaviour:
     m_RotationOrder: 4
   rotateDuration: 0.6
   rb: {fileID: 5382336810237887331}
+  animator: {fileID: 4350457867047023674}
+--- !u!95 &4350457867047023674
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382336810237887334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 406686be2b5ca3049a267a34348a1f21, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5382336810302970148
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5382336810302970148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.84, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5382336810237887329}
@@ -193,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b50b18f604a49f459782b23ffa45d33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ed93d8a83475a943b57a42f594d7e03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
