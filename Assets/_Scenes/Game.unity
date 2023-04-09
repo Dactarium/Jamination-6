@@ -746,8 +746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961984a19f2d4764da8078bb0e8982fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  applePick: {fileID: 0}
+  source: {fileID: 717466079}
+  applePick: {fileID: 8300000, guid: 17d1d4c6e98d64744bec90d8af8ace3a, type: 3}
 --- !u!82 &717466079
 AudioSource:
   m_ObjectHideFlags: 0
@@ -906,6 +906,11 @@ PrefabInstance:
       propertyPath: RedAppleCounter
       value: 
       objectReference: {fileID: 1080493804}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
+      propertyPath: rabbiteatCarrot
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c02b79495f5c82479024d4e46407c26, type: 3}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
       propertyPath: BlueAppleCounter

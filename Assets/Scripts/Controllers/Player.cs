@@ -79,6 +79,9 @@ namespace Controllers
 		[SerializeField]
 		private AudioClip appleThrow;
 
+		[SerializeField]
+		private AudioClip rabbiteatCarrot;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -348,6 +351,8 @@ namespace Controllers
 			{
 				if(carrotAmount >= door.RequiredKey)
 				{
+					audio.clip = rabbiteatCarrot;
+					audio.Play();
 					carrotAmount = 0;
 					carrotSlots.gameObject.SetActive(false);
 					other.gameObject.SetActive(false);
