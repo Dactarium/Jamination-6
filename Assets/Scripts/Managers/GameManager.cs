@@ -32,7 +32,7 @@ namespace Managers
 		private void Start()
 		{
 			Time.timeScale = 1;
-			LevelGenerator.Instance.GenerateLevel(1);
+			LevelGenerator.Instance.GenerateLevel(PlayerPrefs.GetInt("Level", 0));
 			DimensionController.OnDimensionChange += (previous, next) => { CurrentDimension = next; };
 			
 			CurrentDimension = DimensionController.Dimension;

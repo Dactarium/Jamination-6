@@ -351,7 +351,7 @@ namespace Controllers
 					carrotAmount = 0;
 					carrotSlots.gameObject.SetActive(false);
 					other.gameObject.SetActive(false);
-					ReloadScene();
+					NextLevel();
 				}
 			}
 		}
@@ -364,8 +364,9 @@ namespace Controllers
 			}
 		}
 
-		private async void ReloadScene()
+		private async void NextLevel()
 		{
+			PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 0) + 1);
 			await Task.Delay(500);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
