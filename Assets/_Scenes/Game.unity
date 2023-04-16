@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571367, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,14 +225,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49052089}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &49180439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -444,14 +444,11 @@ MonoBehaviour:
   - {fileID: 1848558982173278918, guid: cab18566e02793c448440b2ccd35a2cc, type: 3}
   - {fileID: 1848558982173278918, guid: a359399043078994aad2aa9d0c970594, type: 3}
   - {fileID: 1848558982173278918, guid: bdb61510b1d721a489a101412a305bf2, type: 3}
+  - {fileID: 1848558982173278918, guid: b9bf7d4abaf954f9eabc8c24d5d7e08e, type: 3}
+  - {fileID: 1848558982173278918, guid: 0754bc0cdeaa5496ab1fa642610f4bfc, type: 3}
+  - {fileID: 1848558982173278918, guid: 29d686b6e38994c63b746cfc0a95346b, type: 3}
   key: {fileID: 7199859163248334747, guid: dd09879659f335c48a2df84c931ef2f9, type: 3}
   door: {fileID: 8474905264533712804, guid: efa4e1f5b40b5454faf4b7011145cf4d, type: 3}
---- !u!20 &330585545 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 330585545, guid: 288a9c577cdc2334a9c0a852d2489307,
-    type: 3}
-  m_PrefabInstance: {fileID: 777647387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,8 +490,8 @@ Light:
     m_CustomResolution: -1
     m_Strength: 0.611
     m_Bias: 0
-    m_NormalBias: 0
-    m_NearPlane: 2.62
+    m_NormalBias: 1
+    m_NearPlane: 0.099999994
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -526,7 +523,7 @@ Light:
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -539,14 +536,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.03315821, y: 0.90351397, z: -0.42131543, w: -0.07110802}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 189, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,11 +898,6 @@ PrefabInstance:
       objectReference: {fileID: 1078870651}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
-      propertyPath: appleThrow
-      value: 
-      objectReference: {fileID: 8300000, guid: d1659354ca5018b4b875a18b1b46eb9c, type: 3}
-    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
-        type: 3}
       propertyPath: carrotSlots
       value: 
       objectReference: {fileID: 258514244}
@@ -914,11 +906,6 @@ PrefabInstance:
       propertyPath: RedAppleCounter
       value: 
       objectReference: {fileID: 1080493804}
-    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
-        type: 3}
-      propertyPath: rabbiteatCarrot
-      value: 
-      objectReference: {fileID: 8300000, guid: 4c02b79495f5c82479024d4e46407c26, type: 3}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
       propertyPath: BlueAppleCounter
@@ -932,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 5382336810237887329, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5382336810237887329, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
@@ -1214,11 +1201,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 40375522}
   MenuText: {fileID: 2043753872}
+  _light: {fileID: 410087040}
+  _lightRotateDuration: 360
+  _lightAngleXCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.05555556
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.2222222
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.05555556
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _lightGradient:
+    serializedVersion: 2
+    key0: {r: 0.4575472, g: 0.6973933, b: 1, a: 1}
+    key1: {r: 1, g: 0.9607843, b: 0.9372549, a: 1}
+    key2: {r: 1, g: 0.9607843, b: 0.9372549, a: 0}
+    key3: {r: 1, g: 0.67058825, b: 0.4862745, a: 0}
+    key4: {r: 1, g: 0.67058825, b: 0.4862745, a: 0}
+    key5: {r: 0.45882353, g: 0.69803923, b: 1, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 10023
+    ctime2: 18890
+    ctime3: 36044
+    ctime4: 40670
+    ctime5: 51117
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
   ghosts:
   - {fileID: 1360003654}
   - {fileID: 116123635}
   - {fileID: 643797106}
-  _camera: {fileID: 330585545}
 --- !u!1001 &1578149285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1371,7 +1421,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2120215600 stripped
 MonoBehaviour:
@@ -1848,7 +1898,7 @@ PrefabInstance:
     - target: {fileID: 7491199803991321070, guid: 9d7fa25142cf3e8469bacb561052fe19,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7491199803991321070, guid: 9d7fa25142cf3e8469bacb561052fe19,
         type: 3}
