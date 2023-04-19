@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4832379082219707141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4832379082219707140}
+  - component: {fileID: 4832379082219707143}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4832379082219707140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832379082219707141}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4832379082219707143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832379082219707141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3052faf7cb33e0d4ca460367b0d2f461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Levels>k__BackingField:
+  - Start: 0
+    Red: {fileID: 4900000, guid: 099b593845cad8d43b28397660cc4d47, type: 3}
+    Green: {fileID: 4900000, guid: 0fae2831f825f90428bdc8f54f5b6263, type: 3}
+    Blue: {fileID: 4900000, guid: 5459532ccad4e3b4d9f697f84300a106, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: 0acb96ed0d20c0042bb34314d7afda9f, type: 3}
+    Green: {fileID: 4900000, guid: cb017fa08b157384d8dbca6cf6ca6712, type: 3}
+    Blue: {fileID: 4900000, guid: bd0f6337f267a004faf423e97839dc51, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: d6345d3b55a1b8742899d2a46f652530, type: 3}
+    Green: {fileID: 4900000, guid: d9d8ef7791bf62d4abfaef257391240b, type: 3}
+    Blue: {fileID: 4900000, guid: 3af4914913035904181b85edd88c8f97, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: 090034a44c371b24e9c8be1d1200bbf1, type: 3}
+    Green: {fileID: 4900000, guid: 0c6c7642c2b277b4183ed4c1fe68ff8a, type: 3}
+    Blue: {fileID: 4900000, guid: 4926dfd8d17763f4d9e349c007bf97ea, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: af0084e8aa72f794aad33100c6155022, type: 3}
+    Green: {fileID: 4900000, guid: a4e4ce42dbccc0f41b716987a6d47e3d, type: 3}
+    Blue: {fileID: 4900000, guid: 979a7816195ad9f49b0a1b8096825081, type: 3}
+  - Start: 0
+    Red: {fileID: 4900000, guid: 4dfd6b21d642c184ba72b08b746017a9, type: 3}
+    Green: {fileID: 4900000, guid: 3e9a145c0c66cad489981301aa8349b0, type: 3}
+    Blue: {fileID: 4900000, guid: fc120a6ed81fb4c45b3d1cccfc836ece, type: 3}
+  player: {fileID: 0}
+  wolf: {fileID: 2265774245338505563, guid: 9998f1eadaed25e48a6290d068c37b07, type: 3}
+  lumberjack: {fileID: 8966544544145039649, guid: dc7fa022ffe2bbb40bb363948bb53175,
+    type: 3}
+  redTree: {fileID: 2341172519951798530, guid: cee3083ea9340c441aaf7b9545c194f3, type: 3}
+  greenTree: {fileID: 7894810415581221160, guid: b08d6758141ecf54c84da639e0d48a79,
+    type: 3}
+  blueTree: {fileID: 2398480187183456527, guid: f49a4c1ccc038974f921416743588b35,
+    type: 3}
+  blocks:
+  - {fileID: 1848558982173278918, guid: da10db75fe398d547a01156ba9a4e9b9, type: 3}
+  - {fileID: 1848558982173278918, guid: 440fabea47039de4d87745987017c46d, type: 3}
+  - {fileID: 1848558982173278918, guid: 611c940932bcb2848b851b04b5f1984a, type: 3}
+  - {fileID: 1848558982173278918, guid: f4408d6edce0bea4aa478159eea34b21, type: 3}
+  - {fileID: 1848558982173278918, guid: cab18566e02793c448440b2ccd35a2cc, type: 3}
+  - {fileID: 1848558982173278918, guid: a359399043078994aad2aa9d0c970594, type: 3}
+  - {fileID: 1848558982173278918, guid: bdb61510b1d721a489a101412a305bf2, type: 3}
+  - {fileID: 1848558982173278918, guid: b9bf7d4abaf954f9eabc8c24d5d7e08e, type: 3}
+  - {fileID: 1848558982173278918, guid: 0754bc0cdeaa5496ab1fa642610f4bfc, type: 3}
+  - {fileID: 1848558982173278918, guid: 29d686b6e38994c63b746cfc0a95346b, type: 3}
+  key: {fileID: 7199859163248334747, guid: dd09879659f335c48a2df84c931ef2f9, type: 3}
+  door: {fileID: 8474905264533712804, guid: efa4e1f5b40b5454faf4b7011145cf4d, type: 3}
