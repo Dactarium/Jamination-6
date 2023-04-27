@@ -85,6 +85,18 @@ namespace Controllers
 		[SerializeField]
 		private AudioClip eatApple;
 
+		[SerializeField]
+		private GameObject redAppleImage;
+
+		[SerializeField]
+		private GameObject greenAppleImage;
+
+		[SerializeField]
+		private GameObject blueAppleImage;
+
+		[SerializeField]
+		private GameObject Hand;
+
 		private bool isRunning = false;
 		private bool isRotating = false;
 
@@ -115,15 +127,15 @@ namespace Controllers
 
 			#region Apple Selection
 
-			if (Input.GetKeyDown(KeyCode.Alpha1)) appleDimension = Dimension.Red;
-			else if (Input.GetKeyDown(KeyCode.Alpha2)) appleDimension = Dimension.Green;
-			else if (Input.GetKeyDown(KeyCode.Alpha3)) appleDimension = Dimension.Blue;
+			if (Input.GetKeyDown(KeyCode.Alpha1)) AppleSelection(Dimension.Red);
+			else if (Input.GetKeyDown(KeyCode.Alpha2)) AppleSelection(Dimension.Green);
+			else if (Input.GetKeyDown(KeyCode.Alpha3)) AppleSelection(Dimension.Blue);
 
 			#endregion
 
 			#region Rotate
 
-			if(!isRotating)
+			if (!isRotating)
 			{
 				if (Input.GetKeyDown(KeyCode.Q)) 
 				{
@@ -280,6 +292,23 @@ namespace Controllers
 			count++;
 			counter.text = count.ToString();
 			return count;
+		}
+
+		private void AppleSelection(Dimension dimension)
+        {
+			appleDimension = dimension;
+			switch (dimension)
+            {
+				case (Dimension.Red):
+					Hand.transform.position = new Vector3(redAppleImage.transform.position.x, redAppleImage.transform.position.y - 4, redAppleImage.transform.position.z);
+					break;
+				case (Dimension.Green):
+					Hand.transform.position = new Vector3(greenAppleImage.transform.position.x, greenAppleImage.transform.position.y - 4, greenAppleImage.transform.position.z);
+					break;
+				case (Dimension.Blue):
+					Hand.transform.position = new Vector3(blueAppleImage.transform.position.x, blueAppleImage.transform.position.y - 4, blueAppleImage.transform.position.z);
+					break;
+			}
 		}
 
 		private void SpendCurrentApple()

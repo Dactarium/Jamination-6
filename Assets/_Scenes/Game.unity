@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571367, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028371, g: 0.22571453, b: 0.30692327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -636,6 +636,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48eb8f1c44e481b84100739ea53d7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &691891404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7491199805020747010, guid: 9d7fa25142cf3e8469bacb561052fe19,
+    type: 3}
+  m_PrefabInstance: {fileID: 7491199803608960220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &717466077
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +794,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
+      propertyPath: Hand
+      value: 
+      objectReference: {fileID: 1301561718}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
       propertyPath: audio
       value: 
       objectReference: {fileID: 717466079}
@@ -818,9 +829,24 @@ PrefabInstance:
       objectReference: {fileID: 258514244}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
+      propertyPath: redAppleImage
+      value: 
+      objectReference: {fileID: 1890743426}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
+      propertyPath: blueAppleImage
+      value: 
+      objectReference: {fileID: 1093489688}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
       propertyPath: RedAppleCounter
       value: 
       objectReference: {fileID: 1080493804}
+    - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
+        type: 3}
+      propertyPath: greenAppleImage
+      value: 
+      objectReference: {fileID: 691891404}
     - target: {fileID: 5382336810237887328, guid: 288a9c577cdc2334a9c0a852d2489307,
         type: 3}
       propertyPath: BlueAppleCounter
@@ -966,6 +992,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1093489688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7491199805675201645, guid: 9d7fa25142cf3e8469bacb561052fe19,
+    type: 3}
+  m_PrefabInstance: {fileID: 7491199803608960220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1291519071 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7491199804881340547, guid: 9d7fa25142cf3e8469bacb561052fe19,
@@ -1052,6 +1084,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b18acd2d35c02442af25ba65eee4d38, type: 3}
+--- !u!1 &1301561718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7495559126505458176, guid: 9d7fa25142cf3e8469bacb561052fe19,
+    type: 3}
+  m_PrefabInstance: {fileID: 7491199803608960220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1326171581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3731324416010504637, guid: 9d7fa25142cf3e8469bacb561052fe19,
@@ -1162,6 +1200,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 295ad770a646a05489d2c4b08fedb520, type: 3}
+--- !u!1 &1890743426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7491199805656538987, guid: 9d7fa25142cf3e8469bacb561052fe19,
+    type: 3}
+  m_PrefabInstance: {fileID: 7491199803608960220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2043753872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8518835060502749264, guid: 9d7fa25142cf3e8469bacb561052fe19,
@@ -2003,6 +2047,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491199805020747011, guid: 9d7fa25142cf3e8469bacb561052fe19,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491199805038566994, guid: 9d7fa25142cf3e8469bacb561052fe19,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
